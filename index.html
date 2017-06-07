@@ -4,27 +4,71 @@
     body
     {
       background-color: #FBF7F8;
-      font-size: 2em;
       font-weight: lighter;
       font-family: cursive;
       text-align: center;
-      border: 1px #222233;
-      color: #222233;
+      border: 1px #333344;
+      color: #333344;
+      overflow: hidden;
     }
 
     a
     {
-      font-weight: normal;
-      color: #888899;
+
+      font-weight: lighter;
+      color: #666677;
       font-style: italic;
+      font-family: sans-serif;
+      font-size: 1em;
+    }
+
+    img
+    {
+      width: 30%;
+    }
+
+    .center
+    {
+      position: absolute;
+      top:0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 80%;
+      height: 50%;
+    }
+
+    .header
+    {
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    .subheader
+    {
+      font-size: 1.5em;
+      font-family: cursive;
+    }
+
+    .footer
+    {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 5%;
+      margin: auto;
     }
   </style>
 </head>
 <body>
-  <div><header> Bit Loom </header></div>
-  <div><img src="https://pbs.twimg.com/profile_images/844140818130788352/l_a6qHQt.jpg">logo.png</img></div>
-  <hr></hr>
-  <div>
+  <div class="center">
+    <div class="header">Bit Loom</div>
+    <div><img src="https://pbs.twimg.com/profile_images/844140818130788352/l_a6qHQt.jpg"></img></div>
+    <div class="subheader">crafting digital delight</div>
+  </div>
+  <div class="footer">
+    <hr></hr>
     <a href="twitter.com/bitloomgames">@bitloomgames</a>
     <a href="mailto:bitloomgames@gmail.com">bitloomgames@gmail.com</a>
   </div>
