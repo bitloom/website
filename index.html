@@ -10,44 +10,48 @@
       border: 1px #333344;
       color: #333344;
       overflow: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
     a
     {
-
       font-weight: lighter;
       color: #666677;
       font-style: italic;
       font-family: sans-serif;
-      font-size: 1em;
+      font-size: 1.5em;
     }
 
     img
     {
-      width: 30%;
+      width: 40%;
     }
 
     .center
     {
       position: absolute;
-      top:0;
+      top: 40%;
       bottom: 0;
       left: 0;
       right: 0;
       margin: auto;
-      width: 80%;
-      height: 50%;
+      height: 100%;
     }
 
     .header
     {
-      font-size: 3em;
+      font-size: 4.5em;
       font-weight: bold;
     }
 
     .subheader
     {
-      font-size: 1.5em;
+      font-size: 2em;
       font-family: cursive;
     }
 
@@ -59,18 +63,48 @@
       bottom: 5%;
       margin: auto;
     }
+
+    .tab
+    {
+      padding: 1em;
+    }
   </style>
 </head>
 <body>
   <div class="center">
     <div class="header">Bit Loom</div>
     <div><img src="https://pbs.twimg.com/profile_images/844140818130788352/l_a6qHQt.jpg"></img></div>
-    <div class="subheader">crafting digital delight</div>
+    <div id="caption" class="subheader" onclick="setCaption()">crafting digital delight</div>
   </div>
   <div class="footer">
     <hr></hr>
     <a href="http://twitter.com/bitloomgames">@bitloomgames</a>
+    <span class="tab"></span>
     <a href="mailto:bitloomgames@gmail.com">bitloomgames@gmail.com</a>
   </div>
+
+  <script>
+    var captionId = 0;
+
+    var captions = [
+      "creating cyber surprises",
+      "collaborating on cool content",
+      "interactive goop",
+      "that tickles",
+      "stop it",
+      "I said stop.",
+      "I will just leave if you keep doing that.",
+      "Please, I am asking nicely.",
+      "Okay have it your way.",
+      "Goodbye.",
+      "" ]
+
+    function setCaption()
+    {
+      console.log("setting caption");
+      document.getElementById("caption").innerHTML = captions[Math.min(captionId, captions.length - 1)];
+      captionId += 1;
+    }
+  </script>
 </body>
 </html>
