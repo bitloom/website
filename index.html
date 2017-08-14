@@ -1,134 +1,53 @@
 <html>
 <head>
-  <style>
-    body
-    {
-      background-color: #FFFFFF;
-      font-weight: lighter;
-      font-family: cursive;
-      text-align: center;
-      color: #333344;
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      position: fixed;
-    }
-
-    a
-    {
-      font-weight: lighter;
-      color: #666677;
-      font-style: italic;
-      font-family: sans-serif;
-      font-size: 3vmin;
-      cursor: caret;
-    }
-
-    img
-    {
-      width: 40vmin;
-    }
-
-    .center
-    {
-      position: absolute;
-      top: 2vmin;
-      left: 0;
-      right: 0;
-      height: 20%;
-      -moz-user-select: none;
-      -khtml-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: default;
-    }
-
-    .header
-    {
-      font-size: 8vmin;
-      font-weight: bold;
-    }
-
-    .subheader
-    {
-      margin-top: 5vmin;
-      font-size: 3.5vmin;
-      font-family: cursive;
-      cursor: help;
-    }
-
-    .footer
-    {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 2vmin;
-      height: 6vmin;
-      margin: auto;
-    }
-
-    .tab
-    {
-      padding: 2vmin;
-    }
-
-    .timeline
-    {
-      overflow: scrolling;
-      position: absolute;
-      top: 45vmin;
-      bottom: 10vmin;
-      width: 80vmin;
-      height: auto;
-      left: 0;
-      right: 0;
-      margin: auto;
-      overflow: scroll;
-      overflow-scrolling: touch;
-      -webkit-overflow-scrolling: touch;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <div id="banner">
+    <img class="bannerImage" src="images/banner.png"></img>
+  </div>
+
+  <div id="overview">
+    <div class="overviewCaption">Go on a double-ended dog adventure with your friend!</div>
+    <div><img class="overviewImage" src="images/worm.jpg"></img></div>
+    <div class="overviewCaption">Cooperate and coordinate to solve physics puzzles!</div>
+    <div><img class="overviewImage" src="images/monkeybars.jpg"></img></div>
+    <div class="overviewCaption">Discover a vibrant world and meet strange creatures!</div>
+    <div><img class="overviewImage" src="images/hose.jpg"></img></div>
+    <div class="overviewCaption">Check out some PHOGS! gameplay, subscribe to see more!</div>
+    <div class="overviewVideo"><iframe id="ytplayer" type="text/html" width="100%" height="350px"
+    src="https://www.youtube.com/embed/GVT0kg-mJ7g?autoplay=0&origin=http://example.com"
+    frameborder="0"></iframe></div>
+    <div class="overviewCaption">Subscribe to the newsletter <a href="https://tinyletter.com/bitloomgames">here</a> to follow PHOGS!</div>
+
+    <div><img class="overviewImage" src="images/logo.png"></img></div>
+
+    <div class="timeline"><a class="twitter-timeline" href="https://twitter.com/bitloomgames"></a></div>
+
+    <br />
+
+    <div class="overviewCaption">Thank you for taking a look at our game, have a great day!</div>
+  </div>
+
+
+
+<!--
   <div class="center">
-    <div><img src="logo.jpg"></img></div>
+    <div><img src="images/logo.png"></img></div>
     <div id="caption" class="subheader" onclick="setCaption()">crafting digital delight</div>
   </div>
-
+-->
   <div class="footer">
-    <hr></hr>
-    <a href="http://twitter.com/bitloomgames">@bitloomgames</a>
-    <span class="tab"></span>
-    <a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a>
+    <div id="footerContents">
+      <a href="http://twitter.com/bitloomgames">@bitloomgames</a>
+      <span class="tab"></span>
+      <a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a>
+      <span class="tab"></span>
+      <a href="https://tinyletter.com/bitloomgames">newsletter!</a>
+    </div>
   </div>
 
-  <div class="timeline"><a class="twitter-timeline" href="https://twitter.com/bitloomgames">Tweets by bitloomgames</a></div>
-
   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-  <script>
-    var captionId = 0;
-
-    var captions = [
-      "creating cyber surprises",
-      "collaborating on cool content",
-      "interactive goop",
-      "that tickles",
-      "stop it",
-      "I said stop.",
-      "I will just leave if you keep doing that.",
-      "Please, I am asking nicely.",
-      "Okay have it your way.",
-      "Goodbye.",
-      "" ]
-
-    function setCaption()
-    {
-      console.log("setting caption");
-      document.getElementById("caption").innerHTML = captions[Math.min(captionId, captions.length - 1)];
-      captionId += 1;
-    }
-  </script>
+  <script src="scripts/script.js"></script>
 </body>
 </html>

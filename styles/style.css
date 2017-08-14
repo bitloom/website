@@ -1,0 +1,140 @@
+@font-face
+{
+  font-family: "rounded";
+  src: url(../fonts/rounded.ttf) format("truetype");
+}
+
+html, body
+{
+  background-color: #ffbe6b;
+  font-weight: lighter;
+  font-family: rounded;
+  color: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3vw;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+a
+{
+  text-decoration: underline;
+  color: white;
+  font-size: 1.25em;
+  cursor: caret;
+}
+
+img
+{
+  width: 40vmin;
+}
+
+#banner
+{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.bannerImage
+{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#overview
+{
+  color: black;
+  text-align: center;
+  margin-bottom: 5vw;
+}
+
+.overviewImage
+{
+  width: 100%;
+}
+
+.overviewCaption
+{
+  padding: 2vw;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: white;
+}
+
+.overviewVideo
+{
+  width: 100%;
+  max-width: 100%;
+}
+
+.footer
+{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 1vmin;
+  padding-bottom: 1vmin;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  height: 3vmin;
+  background-color: #5DBCFF;
+}
+
+#footerContents
+{
+  width: 100%;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.center
+{
+  position: absolute;
+  top: 2vmin;
+  left: 0;
+  right: 0;
+  height: 20%;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.header
+{
+  font-size: 8vmin;
+  font-weight: bold;
+}
+
+.subheader
+{
+  margin-top: 5vmin;
+  font-size: 3.5vmin;
+  font-family: cursive;
+  cursor: help;
+}
+
+.tab
+{
+  padding: 1em;
+}
+
+.timeline
+{
+  overflow: scrolling;
+  height: auto;
+  overflow: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  height: 80%;
+}
