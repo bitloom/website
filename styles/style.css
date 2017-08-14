@@ -51,7 +51,7 @@ a
   padding-left: 0;
   padding-right: 0;
   width: 90%;
-  max-width: 900px;
+  max-width: 800px;
 }
 
 .overviewVideo
@@ -169,4 +169,21 @@ a
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
   height: 80%;
+}
+
+@media screen and (min-width: 800px) {
+  .overviewCaption
+  {
+     font-size: 25px;
+  }
+
+  .overviewText
+  {
+    font-size: 25px;
+  }
+
+  #footerContents
+  {
+    font-size: 20px;
+  }
 }
