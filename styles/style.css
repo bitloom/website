@@ -6,15 +6,15 @@
 
 html, body
 {
-  background-color: #ffbe6b;
+  background-color: #FFC867;
   font-weight: lighter;
   font-family: rounded;
   color: #ffffff;
   width: 100%;
-  max-width: 100%;
+  height: auto;
   margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -25,11 +25,6 @@ a
   color: white;
   font-size: 1.25em;
   cursor: caret;
-}
-
-img
-{
-  width: 40vmin;
 }
 
 #banner
@@ -51,25 +46,88 @@ img
   color: black;
   text-align: center;
   margin-bottom: 5vw;
-}
-
-.overviewImage
-{
-  width: 100%;
-}
-
-.overviewCaption
-{
-  padding: 2vw;
-  font-size: 1.25em;
-  font-weight: bold;
-  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 90%;
 }
 
 .overviewVideo
 {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.overviewVideo iframe
+{
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 100%;
+  height: 100%;
+}
+
+.overviewGallery
+{
+  width: 100%;
+}
+
+.overviewImage
+{
+  width: 49.5%;
+  margin: 0;
+  padding: 0;
+}
+
+.fullscreenImage
+{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #5DBCFF;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1000;
+}
+
+.fullscreenImageChild
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: auto;
+  max-height: 100%;
+  z-index: 1001;
+  transform: translate(-50%, -50%);
+}
+
+.overviewCaption
+{
+  padding-top: 3vw;
+  padding-bottom: 3vw;
+  font-size: 3vw;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.overviewText
+{
+  padding-top: 3vw;
+  padding-bottom: 3vw;
+  font-size: 3vw;
+  color: white;
+  width: 100%;
+  text-align: justify;
+  text-align-last: center;
 }
 
 .footer
@@ -82,7 +140,7 @@ img
   padding-bottom: 1vmin;
   padding-left: 3vw;
   padding-right: 3vw;
-  height: 3vmin;
+  height: 4vmin;
   background-color: #5DBCFF;
 }
 
@@ -93,35 +151,7 @@ img
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
-
-.center
-{
-  position: absolute;
-  top: 2vmin;
-  left: 0;
-  right: 0;
-  height: 20%;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-}
-
-.header
-{
-  font-size: 8vmin;
-  font-weight: bold;
-}
-
-.subheader
-{
-  margin-top: 5vmin;
-  font-size: 3.5vmin;
-  font-family: cursive;
-  cursor: help;
+  font-size: 2vw;
 }
 
 .tab
@@ -134,6 +164,7 @@ img
   overflow: scrolling;
   height: auto;
   overflow: scroll;
+  overflow-x: hidden;
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
   height: 80%;
