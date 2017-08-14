@@ -11,10 +11,10 @@ html, body
   font-family: rounded;
   color: #ffffff;
   width: 100%;
-  max-width: 650px;
+  max-width: 100%;
+  margin-top: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3vh;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -89,7 +89,7 @@ img
 #footerContents
 {
   width: 100%;
-  max-width: 650px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
