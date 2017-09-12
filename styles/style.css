@@ -6,7 +6,7 @@
 
 html, body
 {
-  background-color: #FFC867;
+  background-color: #5F60AB;
   font-weight: lighter;
   font-family: rounded;
   color: #ffffff;
@@ -27,11 +27,26 @@ a
   cursor: caret;
 }
 
+a:hover
+{
+  color: pink;1
+}
+
 #banner
 {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+.bodyLink
+{
+  color: orange;
+}
+
+.bodyLink:hover
+{
+  color: pink;
 }
 
 .bannerImage
@@ -43,7 +58,10 @@ a
 
 #overview
 {
-  color: black;
+  position: relative;
+  top: -12.5vw;
+  color: #5F60AB;
+  background-color: #FFFFFF;
   text-align: center;
   margin-bottom: 5vw;
   margin-left: auto;
@@ -52,12 +70,17 @@ a
   padding-right: 0;
   width: 90%;
   max-width: 800px;
+  border-radius: 10px;
+  border-color: #FFFFFF;
+  border-style: solid;
 }
 
 .overviewVideo
 {
   position: relative;
   padding-bottom: 56.25%;
+  width: 90%;
+  margin: auto;
   height: 0;
 }
 
@@ -72,7 +95,8 @@ a
 
 .overviewGallery
 {
-  width: 100%;
+  width: 90%;
+  margin: auto;
 }
 
 .overviewImage
@@ -115,20 +139,20 @@ a
   padding-bottom: 3vw;
   font-size: 3vw;
   font-weight: bold;
-  color: white;
-  width: 100%;
+  width: 90%;
   text-align: center;
+  margin: auto;
 }
 
 .overviewText
 {
   padding-top: 3vw;
   padding-bottom: 3vw;
-  font-size: 3vw;
-  color: white;
-  width: 100%;
+  font-size: 2.75vw;
+  width: 90%;
   text-align: justify;
   text-align-last: center;
+  margin: auto;
 }
 
 .footer
