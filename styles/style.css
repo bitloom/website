@@ -137,7 +137,7 @@ a:hover
 {
   padding-top: 3vw;
   padding-bottom: 3vw;
-  font-size: 3vw;
+  font-size: 2.75vw;
   font-weight: bold;
   width: 90%;
   text-align: center;
@@ -193,6 +193,15 @@ a:hover
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
   height: 80%;
+}
+
+#littleMan
+{
+  margin: auto;
+  width: 40%;
+  position: relative;
+  bottom: 0;
+  right: 0;
 }
 
 @media screen and (min-width: 800px) {
