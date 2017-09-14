@@ -41,7 +41,7 @@ function enterFullscreen(image)
 
   fullscreenImage = document.createElement("div");
   var fullscreenImageChild = document.createElement("img");
-  fullscreenImageChild.src =  "full" + image.src;
+  fullscreenImageChild.src =  image.src + "-full";
   fullscreenImageChild.classList.add("fullscreenImageChild");
   fullscreenImage.appendChild(fullscreenImageChild);
 
