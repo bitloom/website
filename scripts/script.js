@@ -41,6 +41,26 @@ function enterFullscreen(image)
 
   fullscreenImage = document.createElement("div");
   var fullscreenImageChild = document.createElement("img");
+  fullscreenImageChild.src =  "full" + image.src;
+  fullscreenImageChild.classList.add("fullscreenImageChild");
+  fullscreenImage.appendChild(fullscreenImageChild);
+
+  fullscreenImage.onclick = exitFullscreen;
+  fullscreenImage.classList.add("fullscreenImage");
+
+  document.body.appendChild(fullscreenImage);
+}
+
+function enterFullscreenGif(image)
+{
+  if (fullscreenImage != null)
+  {
+    fullscreenImage.parentNode.removeChild(fullscreenImage);
+    fullscreenImage = null;
+  }
+
+  fullscreenImage = document.createElement("div");
+  var fullscreenImageChild = document.createElement("img");
   fullscreenImageChild.src = image.src;
   fullscreenImageChild.classList.add("fullscreenImageChild");
   fullscreenImage.appendChild(fullscreenImageChild);
