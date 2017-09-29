@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<game>
+	<title>PHOGS!</title>
+	<release-date>2018</release-date>
+	<website>http://www.bitloomgames.com/</website>
+	<press-can-request-copy>FALSE</press-can-request-copy>
+
+	<platforms>
+		<platform>
+			<name>PC and Consoles</name>
+			<link>http://store.steampowered.com/app/362380/Push_Me_Pull_You/</link>
+		</platform>
+	</platforms>
+
+	<prices>
+	</prices>
+
+	<description>
+	PHOGS! takes you and a friend on a vibrant, cartoony adventure as a double-ended dog. Stretch your co-op abilities as you learn to work together, sharing a controller and a body in a bizarre and puzzling world!
+	</description>
+
+	<history>
+	PHOGS! is the first game we are developing as Bit Loom. Currently being developed for PC and Consoles at Biome Collective in Dundee, it aims to be a short experience filled with strange puzzles, creatures and interactions. It has been showcased at various events including Insomnia61, EGX 2017 and IndieCade 2017.
+	</history>
+
+	<features>
+		<feature>Double-ended dogs!</feature>
+		<feature>Vibrant, cartoony worlds to explore!</feature>
+		<feature>Share a controller with your friend.</feature>
+		<feature>Meet strange creatures and solve bizarre puzzles!</feature>
+		<feature>Simple controls with surprising interactions.</feature>
+	</features>
+
+	<trailers>
+		<trailer>
+			<name>Early Gameplay Trailer</name>
+			<youtube>9lx41ak9GWk</youtube>
+		</trailer>
+	</trailers>
+
+	<awards>
+		<award>
+			<description>Winner of Dare Academy 2017.</description>
+			<info>Dundee, 25 September, 2017</info>
+		</award>
+		<award>
+			<description>Named in the top games on the show floor at EGX 2017 by EuroGamer and The Guardian.</description>
+			<info>EGX, September, 2017</info>
+		</award>
+	</awards>
+
+	<quotes>
+		<quote>
+			<description>What the industry needs right now is more co-op games about two-headed dogs.</description>
+			<name>Jordan Erica Webber and Keith Stuart</name>
+			<website>The Guardian</website>
+			<link>https://www.theguardian.com/technology/2017/sep/26/egx-2017-favourite-games-biggest-video-game-event</link>
+		</quote>
+		<quote>
+			<description>It is somehow cute and disgusting at the same time.</description>
+			<name>Brendan Caldwell</name>
+			<website>Rock Paper Shotgun</website>
+			<link>https://www.rockpapershotgun.com/2017/09/26/phogs-co-op-two-dogs-one-controller/</link>
+		</quote>
+		<quote>
+			<description>Great ideas and buckets of charm.</description>
+			<name>Matthew Reynolds</name>
+			<website>Eurogamer</website>
+			<link>http://www.eurogamer.net/articles/2017-09-24-egx-2017-the-best-games-from-the-show-floor</link>
+		</quote>
+		<quote>
+			<description>It perfectly captures that cheerful, colourful spirit of gaming which is normally left exclusively to the chipper halls of Nintendo, or Rare.</description>
+			<name>Dann Sullivan</name>
+			<website>Big Boss Battle</website>
+			<link>https://bigbossbattle.com/first-impressions-phogs/</link>
+		</quote>
+	</quotes>
+
+	<additionals>
+		<additional>
+			<title>PHOGS! Sound Track</title>
+			<description>The music for PHOGS! on Sound Cloud.</description>
+			<link>https://soundcloud.com/henwuar/sets/phogs</link>
+		</additional>
+	</additionals>
+
+	<credits>
+		<credit>
+			<person>Douglas Flinders</person>
+			<website>http://twitter.com/douglasflinders</website>
+			<role>Artist, Bit Loom</role>
+		</credit>
+		<credit>
+			<person>Henry Pullan</person>
+			<website>http://twitter.com/henwuar</website>
+			<role>Programmer &amp; Audo Producer, Bit Loom</role>
+		</credit>
+		<credit>
+			<person>James Wood</person>
+			<website>http://twitter.com/jctwood</website>
+			<role>Programmer, Bit Loom</role>
+		</credit>
+	</credits>
+</game>
