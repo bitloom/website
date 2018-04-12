@@ -6,7 +6,7 @@
 
 html, body
 {
-  background-color: #5F60AB;
+  background-color: #585bac;
   font-weight: lighter;
   font-family: rounded;
   color: #ffffff;
@@ -59,7 +59,7 @@ a:hover
 #overview
 {
   position: relative;
-  top: -12.5vw;
+  top: -5vw;
   color: #5F60AB;
   background-color: #FFFFFF;
   text-align: center;
