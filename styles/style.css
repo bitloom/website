@@ -12,6 +12,19 @@
   100%  {width: 100%;}
 }
 
+@keyframes LogoWarp
+{
+  0%    {rotate: -45deg; opacity: 0}
+  50%   {rotate: 15deg; }
+  100%  {rotate:0; opacity: 100%;}
+}
+
+@keyframes TaglinePopIn 
+{
+  0%    {opacity: 0;}
+  100%  {opacity: 100%; }
+}
+
 html, body
 {
   background-color: #7f4ea7;
@@ -62,17 +75,20 @@ a:hover
   margin-left : auto;
   margin-right : auto;
   transform-origin: center;
-  animation-name: WarpIn;
-  animation-duration: .5s;
   max-width: 100%;
   padding-top: 1%;
   padding-bottom: 1%;
+
+  animation-name: WarpIn;
+  animation-duration: .5s;
+  animation-fill-mode: both;
 }
 
 #mainBody
 {
-  min-height: 500px;
-  animation-delay: 0.05s;
+  height:20rem;
+  margin-bottom: 5%;
+  animation-delay: 0.25s;
 }
 
 #logo
@@ -84,6 +100,7 @@ a:hover
   margin-right: auto;
   max-width: 75%;
   max-height: 300px;
+  animation: LogoWarp 1s both;
 }
 
 #tagline
@@ -101,6 +118,36 @@ a:hover
   margin-bottom: 1%;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+#tag1
+{
+  animation: TaglinePopIn 1s both 0.5s;
+}
+
+#tag2
+{
+  animation: TaglinePopIn 1s both 0.75s;
+}
+
+#tag3
+{
+  animation: TaglinePopIn 1s both 1s;
+}
+
+#tag4
+{
+  animation: TaglinePopIn 1s both 1.25s;
+}
+
+#tag5
+{
+  animation: TaglinePopIn 1s both 1.5s;
+}
+
+#tag6
+{
+  animation: TaglinePopIn 1s both 1.75s;
 }
 
 @media screen and (min-width: 800px) {
