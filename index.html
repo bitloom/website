@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <img src="images/logo.png" id="logo">
+  <img src="images/logo_web.webp" id="logo">
   <div id="tagline">
     <span id="tag1">Making</span> 
     <span id="tag2">Games</span> 
@@ -15,11 +15,31 @@
   </div>
 
   <div class="contentContainer">
-    <div id="navigation" class="contentBox"><a>Navigation!</a></div>
+    <div id="navigation" class="contentBox">
+      <a onclick="swapContent('home', this)" class="selected">Games</a>
+      <a onclick="swapContent('about', this)">About Us</a>
+      <a onclick="swapContent('contact', this)">Contact</a>
+    </div>
   </div>
 
-  <div class="contentContainer">
-    <div id="mainBody" class="contentBox">Hello Bit Loom Content</div>
+  <div class="contentContainer" id="displayContent">
+    <div id="home" class="contentBoxDelay">
+      <h1>PHOGS!</h1>
+      <br>
+      <p>A PHOGS IMG</p>
+      <br>
+      <p>A Double-Ended Dog puzzle adventure</p>
+      <a class="button" href="https://playphogs.com">Out Now!</a>
+    </div>
   </div>
+
+  <div class="hidden" id="hiddenContent">
+    <div id="about" class="contentBoxDelay">This is where we thrash</div>
+    <div id="contact" class="contentBoxDelay">Don't talk to me or my son again</div>
+  </div>
+
+
+  <script src="scripts/script.js"></script>
+
 </body>
 </html>

@@ -25,9 +25,28 @@
   100%  {opacity: 100%; }
 }
 
+@keyframes SelectItem
+{
+  0%    {border-radius: 0; }
+  100%  {border-radius: 25px; }
+}
+
+@keyframes ButtonRotate
+{
+  0%    {rotate: 15deg;}
+  25%   {rotate: 0deg;}
+  50%   {rotate: -15deg;}
+  100%  {rotate: 0deg;}
+}
+
+:root
+{
+  --purple: #7f4ea7;
+}
+
 html, body
 {
-  background-color: #7f4ea7;
+  background-color: var(--purple);
   font-weight: lighter;
   font-family: phont;
   color: #ffffff;
@@ -45,11 +64,35 @@ a
   text-decoration: underline;
   font-size: 1.25em;
   cursor: pointer;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
 
 a:hover
 {
   color: rgb(211, 74, 165);
+}
+
+a.selected
+{
+  background-image: linear-gradient(#7f4ea7,#602e88);
+  color: whitesmoke;
+  border-radius: inherit;
+
+  animation: SelectItem 0.25s both
+}
+
+a.button
+{
+  color:whitesmoke;
+  background-image: linear-gradient(#7f4ea7,#602e88);
+  border-radius: 25px;
+  animation: ButtonRotate 1s;
+  animation-iteration-count: infinite;
+  padding-left: 1vh;
+  padding-right: 1vh;
 }
 
 .contentContainer
@@ -61,34 +104,46 @@ a:hover
   padding-top:5px;
   padding-bottom: 5px;
   margin-top:5px;
-  align-content: center;
   text-align: center;
 }
 
-.contentBox
+.contentBox, .contentBoxDelay
 {
   background-color: whitesmoke;
   color: #7f4ea7;
   border-radius: 25px;
   width: auto;
-  height: auto;
+  height: inherit;
   margin-left : auto;
   margin-right : auto;
   transform-origin: center;
   max-width: 100%;
-  padding-top: 1%;
-  padding-bottom: 1%;
+  overflow: hidden;
 
   animation-name: WarpIn;
   animation-duration: .5s;
   animation-fill-mode: both;
 }
 
-#mainBody
+.hidden
 {
-  height:20rem;
-  margin-bottom: 5%;
+  visibility:collapse;
+  padding: 0;
+  height: 0;
+}
+
+.contentBoxDelay
+{
   animation-delay: 0.25s;
+  padding-top: inherit;
+  padding-bottom: inherit;
+}
+
+#displayContent
+{
+  height: auto;
+  padding-top: 1vh;
+  padding-bottom: 5vh;
 }
 
 #logo
@@ -116,8 +171,8 @@ a:hover
 {
   margin-top: 1%;
   margin-bottom: 1%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
 }
 
 #tag1
@@ -151,9 +206,8 @@ a:hover
 }
 
 @media screen and (min-width: 800px) {
-
-  #footerContents
+  .contentContainer
   {
-    font-size: 20px;
+    width: 99%;
   }
 }
