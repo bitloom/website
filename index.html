@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF8">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <img src="images/logo_web.webp" id="logo">
+  <img src="images/logo_web.webp" id="logo" alt="The Bit Loom Logo">
   <div id="tagline">
     <span id="tag1">Making</span> 
     <span id="tag2">Games</span> 
@@ -21,21 +22,44 @@
       <a onclick="swapContent('contact', this)">Contact</a>
     </div>
   </div>
-
+  
   <div class="contentContainer" id="displayContent">
     <div id="home" class="contentBoxDelay">
-      <h1>PHOGS!</h1>
+      <h2>Our games</h2>
       <br>
-      <p>A PHOGS IMG</p>
+      <a href="http://trayracers.com"><img src="images/trlogo.webp" class="logoImage" alt="The Tray Racers Logo"></a>
       <br>
-      <p>A Double-Ended Dog puzzle adventure</p>
-      <a class="button" href="https://playphogs.com">Out Now!</a>
+      <p>An Adorable Post-Apocalyptic Multiplayer Racer!</p>
+      <p>Coming to PC and Switch 2023</p>
+      <div class="linkButton"><a class="button" href="http://trayracers.com">More Info!</a></div>
+
+      
+      <a href="https://playphogs.com"><img src="images/phogslogo.webp" class="logoImage" alt="The PHOGS Logo"></a>
+      <br>
+      <p>A Double-Ended Dog puzzle adventure.</p>
+      <p>Out Now on all major platforms!</p>
+      <div class="linkButton"><a class="button" href="https://playphogs.com">More Info!</a></div>
+      <br>
     </div>
   </div>
 
   <div class="hidden" id="hiddenContent">
-    <div id="about" class="contentBoxDelay">This is where we thrash</div>
-    <div id="contact" class="contentBoxDelay">Don't talk to me or my son again</div>
+    <!--ABOUT-->
+    <div id="about" class="contentBoxDelay">
+      <h2>Hi There! We're Bit Loom!</h2>
+      <img src="images/theteam.webp" id="teamPhoto" alt="A Picture of Bit Loom: 3 People side by side with drawn characters on each of their shoulders">
+      <p class="aboutText">We decided we wanted to make games together back in 2017 and have somehow managed to keep it up until now.</p>
+      <p class="aboutText">Based in "Sunny" Dundee up in Scotland, Doug, Henry and James love to come up with weird ideas to try and make the world a little brighter.</p>
+      <br>
+    </div>
+    <!--CONTACT-->
+    <div id="contact" class="contentBoxDelay">
+      <h2>Come and say hi!</h2>
+      <p class="aboutText">You can reach out to us in the following places:</p>
+      <p class="aboutText">email: <a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a></p>
+      <p class="aboutText">twitter: <a href="https://www.twitter.com/bitloomgames">@bitloomgames</a></p>
+      <br>
+    </div>
   </div>
 
 

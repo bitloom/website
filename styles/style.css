@@ -6,8 +6,8 @@
 
 @keyframes WarpIn
 {
-  0%    {width: 0%; opacity: 0}
-  50%   {width: 100%; opacity: 100%;}
+  0%    {width: 0%; opacity: 0; height:0;}
+  50%   {width: 100%; opacity: 100%; height:initial;}
   75%   {width: 90%;}
   100%  {width: 100%;}
 }
@@ -33,9 +33,10 @@
 
 @keyframes ButtonRotate
 {
-  0%    {rotate: 15deg;}
-  25%   {rotate: 0deg;}
-  50%   {rotate: -15deg;}
+  0%    {rotate: 0deg;}
+  25%   {rotate: 5deg;}
+  50%   {rotate: 0deg;}
+  75%   {rotate: -5deg;}
   100%  {rotate: 0deg;}
 }
 
@@ -51,12 +52,20 @@ html, body
   font-family: phont;
   color: #ffffff;
   width: 100%;
-  height: auto;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-  overflow: auto;
-  overflow-x: hidden;
+  /*height: 0;*/
+  height:auto;
+  margin: 0;
+  /*overflow: hidden;
+  overflow-x: hidden;*/
+  text-align: center;
+}
+
+body
+{
+  /*display: flex;
+  flex-direction: column;
+  flex-flow: column;*/
+  min-height: 100%;
 }
 
 a
@@ -84,27 +93,41 @@ a.selected
   animation: SelectItem 0.25s both
 }
 
+.linkButton
+{
+  color:whitesmoke;
+  /*animation: ButtonRotate 5s linear infinite;*/
+  padding-left: 1vh;
+  padding-right: 1vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3vh;
+}
+
 a.button
 {
   color:whitesmoke;
   background-image: linear-gradient(#7f4ea7,#602e88);
   border-radius: 25px;
-  animation: ButtonRotate 1s;
-  animation-iteration-count: infinite;
-  padding-left: 1vh;
-  padding-right: 1vh;
+}
+
+a.button:hover
+{
+  background-image: linear-gradient(#a773d1,#602e88);
 }
 
 .contentContainer
 {
   width: 75%;
   max-width: 750px;
+  /*max-height: 500px;*/
   margin-left : auto;
   margin-right : auto;
   padding-top:5px;
-  padding-bottom: 5px;
+  /*padding-bottom: 5px;*/
   margin-top:5px;
   text-align: center;
+  height: min-content;
 }
 
 .contentBox, .contentBoxDelay
@@ -113,12 +136,10 @@ a.button
   color: #7f4ea7;
   border-radius: 25px;
   width: auto;
-  height: inherit;
   margin-left : auto;
   margin-right : auto;
   transform-origin: center;
   max-width: 100%;
-  overflow: hidden;
 
   animation-name: WarpIn;
   animation-duration: .5s;
@@ -130,6 +151,8 @@ a.button
   visibility:collapse;
   padding: 0;
   height: 0;
+  position:absolute;
+  /*display: block;*/
 }
 
 .contentBoxDelay
@@ -137,14 +160,19 @@ a.button
   animation-delay: 0.25s;
   padding-top: inherit;
   padding-bottom: inherit;
+  height: auto;
+  /*min-height: 90%;*/
 }
 
-#displayContent
+/*#displayContent
 {
-  height: auto;
-  padding-top: 1vh;
-  padding-bottom: 5vh;
-}
+  display:flex;
+  flex-flow: column;
+  overflow-y: auto;
+  overflow-x: visible;
+  flex-grow: 1;
+  height: inherit;
+}*/
 
 #logo
 {
@@ -153,9 +181,27 @@ a.button
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 75%;
-  max-height: 300px;
+  /*width : auto;*/
+  height: auto;
+  min-width: 150px;
+  width: 20%;
+  max-width: 200px;
+  max-height: 15%;
   animation: LogoWarp 1s both;
+}
+
+.logoImage
+{
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+}
+
+#teamPhoto
+{
+  max-width: 100%;
+  width: 550px;
+  border-radius: 5px;
 }
 
 #tagline
@@ -174,6 +220,22 @@ a.button
   padding-top: 1.5%;
   padding-bottom: 1.5%;
 }
+
+.aboutText
+{
+  width:500px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*.footer
+{
+  margin-left:auto;
+  margin-right: auto;
+  display: flex;
+  height: min-content;
+}*/
 
 #tag1
 {
@@ -205,7 +267,7 @@ a.button
   animation: TaglinePopIn 1s both 1.75s;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (max-width: 800px) {
   .contentContainer
   {
     width: 99%;
