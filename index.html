@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF8">
   <link rel="stylesheet" href="styles/style.css">
+  <link rel="icon" type="image/x-icon" href="images/Logo-Icon.ico">
+  <title>Bit Loom</title>
 </head>
 <body>
-  <img src="images/logo_web.webp" id="logo" alt="The Bit Loom Logo">
+  <img src="images/logo.webp" id="logo" alt="The Bit Loom Logo">
+  <img src="images/logo_text_light.webp" id="logoText" alt="The words 'Bit Loom'">
   <div id="tagline">
     <span id="tag1">Making</span> 
     <span id="tag2">Games</span> 
@@ -17,22 +20,30 @@
 
   <div class="contentContainer">
     <div id="navigation" class="contentBox">
-      <a onclick="swapContent('home', this)" class="selected">Games</a>
-      <a onclick="swapContent('about', this)">About Us</a>
-      <a onclick="swapContent('contact', this)">Contact</a>
+      <a onclick="swapContent('home', this)" class="selected">Home</a>
+      <a onclick="swapContent('contact', this)">Find Us</a>
     </div>
   </div>
   
   <div class="contentContainer" id="displayContent">
     <div id="home" class="contentBoxDelay">
+      <h2>Hi There! We're Bit Loom!</h2>
+      <p class="aboutText">We decided we wanted to make games together back in 2017 and have somehow managed to keep it up until now.</p>
+      <p class="aboutText">Based in "Sunny" Dundee up in Scotland, Doug, Henry, James and Caitlin love to come up with weird ideas to try and make the world a little brighter.</p>
+      <p class="aboutText">We have release 2 games and are currently working on a new project which we'll be talking about more soon! 👀</p>
       <h2>Our games</h2>
       <br>
-      <a href="http://trayracers.com"><img src="images/trlogo.webp" class="logoImage" alt="The Tray Racers Logo"></a>
+      <div class="gameEntry">
+        <!--<a href="http://trayracers.com"><img src="images/trlogo.webp" class="logoImage" alt="The Tray Racers Logo"></a>-->
+        <div class="gameElement">
+          images go here
+        </div>
+        <div class="gameElement">
+          An Adorable Post-Apocalyptic Multiplayer Racer!
+        </div>  
+      </div>
       <br>
-      <p>An Adorable Post-Apocalyptic Multiplayer Racer!</p>
-      <!--<p>Out now on <a href="https://store.steampowered.com/app/1913870/Tray_Racers/">Steam</a>and <a href="https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Tray-Racers--2366035.html">Nintendo Switch</a></p>-->
       <div class="linkButton"><a class="button" href="http://trayracers.com">Out Now!</a></div>
-
       
       <a href="https://playphogs.com"><img src="images/phogslogo.webp" class="logoImage" alt="The PHOGS Logo"></a>
       <br>
@@ -44,24 +55,23 @@
   </div>
 
   <div class="hidden" id="hiddenContent">
-    <!--ABOUT-->
-    <div id="about" class="contentBoxDelay">
-      <h2>Hi There! We're Bit Loom!</h2>
-      <img src="images/theteam.webp" id="teamPhoto" alt="A Picture of Bit Loom: 3 People side by side with drawn characters on each of their shoulders">
-      <p class="aboutText">We decided we wanted to make games together back in 2017 and have somehow managed to keep it up until now.</p>
-      <p class="aboutText">Based in "Sunny" Dundee up in Scotland, Doug, Henry and James love to come up with weird ideas to try and make the world a little brighter.</p>
-      <br>
-    </div>
     <!--CONTACT-->
     <div id="contact" class="contentBoxDelay">
       <h2>Come and say hi!</h2>
-      <p class="aboutText">You can reach out to us in the following places:</p>
-      <p class="aboutText">email: <a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a></p>
-      <p class="aboutText">twitter: <a href="https://www.twitter.com/bitloomgames">@bitloomgames</a></p>
+      <p class="aboutText">You can reach out to us by email:</p>
+      <p class="aboutText"><a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a></p>
+      <br>
+      <p class="aboutText">Follow our socials for updates on future projects!</p>
+      <p class="aboutText">x: <a href="https://x.com/bitloomgames">@bitloomgames</a></p>
+      <p class="aboutText">instagram: <a href="https://www.instagram.com/bitloomgames/">bitloomgames</a></p>
+      <p class="aboutText">tiktok: <a href=https://www.tiktok.com/@bitloomgames>@bitloomgames</a></p>
+      <p class="aboutText">bsky: <a href="https://bsky.app/profile/bitloomgames.bsky.social">@bitloomgames.bsky.social</a></p>
+      <p class="aboutText">cohost: <a href="https://cohost.org/bitloomgames">@bitloomgames</a></p>
       <br>
     </div>
   </div>
 
+  <footer><img src="images/little-man.png" width="40px" height="auto" id="footerImage"></img><p id="footerText">© Bit Loom Ltd. 2024</p></footer>
 
   <script src="scripts/script.js"></script>
 
