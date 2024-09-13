@@ -210,8 +210,8 @@ a.button:hover
 
 .logoImage
 {
-  max-width: 100%;
-  width: 300px;
+  max-width: 50%;
+  width: 200px;
   height: auto;
 }
 
@@ -267,20 +267,62 @@ footer
 
 .gameEntry
 {
-  width:100%;
-  display: flex;
-  flex: content;
-  height:fit-content;
+  width:90%;
+  /*display: flex;
+  flex: content;*/
   padding-top:1vh;
   padding-bottom:1vh;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  height:min-content;
 }
 
-.gameElement
+h3
 {
-  flex:1;
-  margin-right:20px;
-  margin-left:20px;
-  border:2px solid #7f4ea7;
+  margin-bottom: 0px;
+}
+
+.screenshot
+{
+  max-width:500px;
+  width:40%;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:auto;
+  margin-bottom:auto;
+  border-radius: 10px;
+  position: inherit;
+}
+
+.slideshow
+{
+  align-self: center;
+  display: contents;
+  position:inline;
+  width:50%;
+  height:250px;
+}
+
+.fadeInScreenshot
+{
+  animation: TaglinePopIn 1s forwards;
+}
+
+.fadeOutScreenshot
+{
+  animation: TaglinePopIn 1s reverse;
+}
+
+.gameDescription
+{
+  width:95%;
+  height:100%;
+  vertical-align: middle;
+  text-align: center;
+  align-items: center;
+  align-self: center;
 }
 
 #tag1
@@ -313,23 +355,32 @@ footer
   animation: TaglinePopIn 1s both 1.75s;
 }
 
+hr
+{
+  opacity: 25%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 @media screen and (max-width: 800px) {
   .contentContainer
   {
     width: 99%;
   }
 
-  .gameImageContainer
+  .gameEntry
   {
-    float:none;
-    width:100%;
-    border:2px solid #7f4ea7;
+    flex-direction: column;
   }
 
-  .gameTextContainer
+  .gameElement
   {
-    float:none;
-    width:100%;
-    border:2px solid #7f4ea7;
+    max-width: 100%;
   }
+
+  .reverseEntry
+  {
+    flex-direction: column-reverse;
+  }
+  
 }
