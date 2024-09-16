@@ -5,32 +5,9 @@ var displayContainer = document.getElementById('displayContent');
 var taglineContainer = document.getElementById('tagline');
 var navigationContainer = document.getElementById('navigation');
 
-const slideTimeSeconds = 5;
-
-var games = [
-  "Games",
-  "Interactives"
- ]
-
- var adjectivesB =[
-  "Surprise",
-  "Move"
- ]
-
- var adjectivesB = [
-  "Delight",
-  "Shake"
- ]
-
 var slidePositions = []
-
-function randomiseCaption()
-{
-  console.log("setting caption");
-  document.getElementById("tag2").innerHTML = games[Math.floor(Math.random() * games.length)];
-  document.getElementById("tag4").innerHTML = adjectivesA[Math.floor(Math.random() * adjectivesA.length)];
-  document.getElementById("tag6").innerHTML = adjectivesB[Math.floor(Math.random() * adjectivesB.length)];
-}
+var slideshowElements = []
+const slideTimeSeconds = 5;
 
 function swapContent(contentId, clickedButton)
 {
@@ -53,66 +30,68 @@ function swapContent(contentId, clickedButton)
 
   displayContainer.appendChild(document.getElementById(contentId));
 }
-/*
+
+function setup()
+{
+	slideshowElements = document.getElementsByClassName("slideshow");
+	
+	for(let i = 0; i < slideshowElements.length; i++)
+	{
+		slidePositions.push(-1);
+	}
+	
+	advanceSlides();
+}
+
 function advanceSlides()
 {
-  console.log("Advance!");
-
-  let slideContent = document.getElementsByClassName("slideshow");
-  for (let slideshow = 0; slideshow < slideContent.length; slideshow++) 
-  {
-    const element = slideContent[slideshow];
-    var lastSlide = 0
-    if(slidePositions.length <= slideshow)
-    {
-      slidePositions.push(0);
-    }
-    else
-    {
-      lastSlide = slidePositions[slideshow]
-      slidePositions[slideshow]++;
-    }
-
-    var slides = element.getElementsByClassName("screenshot");
-    if(slides.length <= slidePositions[slideshow])
-    {
-      slidePositions[slideshow] = 0;
-    }
-    
-    if(slides.length == 0)
-    {
-      console.log("no slides!")
-      continue;
-    }
-
-    console.log(slidePositions[slideshow]);
-
-    for(let slide = 0; slide < slides.length; slide++)
-    {
-      console.log(slide);
-      if(slide == slidePositions[slideshow])
-      {
-        console.log("Fade in!");
-        slides[slide].className += " fadeInScreenshot";
-        slides[slide].style.display = "inherit";  
-      }
-      else if(slide == lastSlide)
-      {
-        console.log("Fade out!")
-        slides[slide].className += " fadeOutScreenshot";
-        slides[slide].style.display = "inherit";
-      }
-      else
-      {
-        console.log("hide!")
-        slides[slide].className = slides[slide].className.replace(" fadeOutScreenshot", "");
-        slides[slide].className = slides[slide].className.replace(" fadeInScreenshot", "");
-        slides[slide].display = "none";
-      }
-    }
-
+	for(let slideshow = 0; slideshow < slideshowElements.length; slideshow++)
+	{
+		let slides = slideshowElements[slideshow].getElementsByClassName("screenshot");
+		let lastSlide = slidePositions[slideshow];
+		slidePositions[slideshow]++;
+		if(slidePositions[slideshow] >= slides.length)
+		{
+			slidePositions[slideshow] = 0;
+		}
+		
+		//revert last slide to -1 to avoid operating on the same slide
+		if(slidePositions[slideshow] == lastSlide)
+		{
+			lastSlide = -1;
+		}
+		
+		for(let slide = 0; slide < slides.length; slide++)
+		{
+			if(slide == slidePositions[slideshow])
+			{
+				//console.log("Fade in!");
+				slides[slide].className += " fadeInScreenshot";
+				slides[slide].className = slides[slide].className.replace(" fadeOutScreenshot", "");
+				slides[slide].style.display = "inherit";
+				slides[slide].style.zIndex = 2;
+			}
+			else if(slide == lastSlide)
+			{
+				//console.log("Fade out!")
+				slides[slide].className += " fadeOutScreenshot";
+				slides[slide].className = slides[slide].className.replace(" fadeInScreenshot", "");
+				slides[slide].style.display = "inherit";
+				slides[slide].opacity = "100%";
+				slides[slide].style.zIndex = 1;
+			}
+			else
+			{
+				//console.log("hide!")
+				slides[slide].className = slides[slide].className.replace(" fadeInScreenshot", "");
+				slides[slide].className = slides[slide].className.replace(" fadeOutScreenshot", "");
+				slides[slide].style.display = "none";
+				slides[slide].opacity = "0";
+				slides[slide].style.zIndex = 0;
+			}
+		}
+	}
     setTimeout(advanceSlides, slideTimeSeconds*1000);
-  }
 }
-*/
-//advanceSlides()
+
+setup();
