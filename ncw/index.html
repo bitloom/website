@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF8">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="../images/Logo-Icon.ico">
+  <title>Noughts and Crosswords</title>
+</head>
+<body>
+	<div id="container">
+		
+		<div id="header">
+			Noughts and Crosswords!
+			<hr>
+		</div>
+		
+		<div id="game">
+			<div id="wordgrid">
+				<!--
+				c = column
+				r = row
+				d = diagonal
+
+				dtl | ctl | ctm | ctr | dtr
+				rtl |  0  |  1  |  2  | rtr
+				rml |  3  |  4  |  5  | rmr
+				rbl |  6  |  7  |  7  | rbr
+				dbl | cbl | cbm | cbr | dbr
+				
+				-->
+				<!--Row1-->
+				<div class="scorespace tl" id="dtl">0</div>
+				<div class="scorespace t" id="ctl">0</div>
+				<div class="scorespace t" id="ctm">0</div>
+				<div class="scorespace t" id="ctr">0</div>
+				<div class="scorespace tr" id="dtr">0</div>
+
+				<!--Row2-->
+				<div class="scorespace l" id="rtl">0</div>
+				<div class="letterspace" id="l0" style="background-color: whitesmoke";>T</div>
+				<div class="letterspace" id="l1"></div>
+				<div class="letterspace" id="l2"></div>
+				<div class="scorespace r" id="rtr">0</div>
+
+				<!--Row3-->
+				<div class="scorespace l" id="rml">0</div>
+				<div class="letterspace" id="l3"></div>
+				<div class="letterspace" id="l4"></div>
+				<div class="letterspace" id="l5"></div>
+				<div class="scorespace r" id="rmr">0</div>
+
+				<!--Row4-->
+				<div class="scorespace l" id="rbl">0</div>
+				<div class="letterspace" id="l6"></div>
+				<div class="letterspace" id="l7"></div>
+				<div class="letterspace" id="l8"></div>
+				<div class="scorespace r" id="rbr">0</div>
+				
+
+				<!--Row5-->
+				<div class="scorespace bl" id="dbl">0</div>
+				<div class="scorespace b" id="cbl">0</div>
+				<div class="scorespace b" id="cbm">0</div>
+				<div class="scorespace b" id="cbr">0</div>
+				<div class="scorespace br" id="dbr">0</div>
+
+			</div>
+			<div id="keyboard">
+				<div class="keyrow">
+					<div class="key">Q</div>
+					<div class="key">W</div>
+					<div class="key">E</div>
+					<div class="key">R</div>
+					<div class="key">T</div>
+					<div class="key">Y</div>
+					<div class="key">U</div>
+					<div class="key">I</div>
+					<div class="key">O</div>
+					<div class="key">P</div>
+				</div>
+
+				<div class="keyrow">
+					<!--<div style="width:var(--keypadding)"></div>-->
+					<div class="key">A</div>
+					<div class="key">S</div>
+					<div class="key">D</div>
+					<div class="key">F</div>
+					<div class="key">G</div>
+					<div class="key">H</div>
+					<div class="key">J</div>
+					<div class="key">K</div>
+					<div class="key">L</div>
+				</div>
+
+				<div class="keyrow">
+					<!--<div style="width:var(--keysize)"></div>-->
+					<div class="key">Z</div>
+					<div class="key">X</div>
+					<div class="key">C</div>
+					<div class="key">V</div>
+					<div class="key">B</div>
+					<div class="key">N</div>
+					<div class="key">M</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="ncw.js"></script>
+
+</body>
+</html>
