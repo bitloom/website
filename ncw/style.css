@@ -79,12 +79,12 @@ hr
 {
   color: WHITESMOKE;
   width: 99%;
+  margin-bottom:0;
 }
 
 #header
 {
 	padding-top:25px;
-	padding-bottom:25px;
   font-size:5vw;
 	flex: 0 1 10%;
 }
@@ -158,12 +158,20 @@ hr
   margin-left: 2.5px;
 }
 
-.key:hover
+#floatkey
 {
+  border-radius: 5px;
+  width: var(--keysize);
+  height:var(--keysize);
   background: whitesmoke;
   color:var(--purple);
-}
+  position:absolute;
+  
+  justify-content: center;
+  align-items: center;
 
+  display:none;
+}
 
 /*score spaces*/
 .scorespace

@@ -22,9 +22,9 @@
 				d = diagonal
 
 				dtl | ctl | ctm | ctr | dtr
-				rtl |  0  |  1  |  2  | rtr
-				rml |  3  |  4  |  5  | rmr
-				rbl |  6  |  7  |  7  | rbr
+				rtl | tl  | tm  | tr  | rtr
+				rml | ml  | mm  | mr  | rmr
+				rbl | bl  | bm  | br  | rbr
 				dbl | cbl | cbm | cbr | dbr
 				
 				-->
@@ -37,23 +37,23 @@
 
 				<!--Row2-->
 				<div class="scorespace l" id="rtl">0</div>
-				<div class="letterspace" id="l0" style="background-color: whitesmoke";>T</div>
-				<div class="letterspace" id="l1"></div>
-				<div class="letterspace" id="l2"></div>
+				<div class="letterspace" id="tl"></div>
+				<div class="letterspace" id="tm"></div>
+				<div class="letterspace" id="tr"></div>
 				<div class="scorespace r" id="rtr">0</div>
 
 				<!--Row3-->
 				<div class="scorespace l" id="rml">0</div>
-				<div class="letterspace" id="l3"></div>
-				<div class="letterspace" id="l4"></div>
-				<div class="letterspace" id="l5"></div>
+				<div class="letterspace" id="ml"></div>
+				<div class="letterspace" id="mm"></div>
+				<div class="letterspace" id="mr"></div>
 				<div class="scorespace r" id="rmr">0</div>
 
 				<!--Row4-->
 				<div class="scorespace l" id="rbl">0</div>
-				<div class="letterspace" id="l6"></div>
-				<div class="letterspace" id="l7"></div>
-				<div class="letterspace" id="l8"></div>
+				<div class="letterspace" id="bl"></div>
+				<div class="letterspace" id="bm"></div>
+				<div class="letterspace" id="br"></div>
 				<div class="scorespace r" id="rbr">0</div>
 				
 
@@ -101,11 +101,14 @@
 					<div class="key">B</div>
 					<div class="key">N</div>
 					<div class="key">M</div>
+					<!--<div style="width:5px"></div>-->
 				</div>
 			</div>
 		</div>
 	</div>
 	
+	<div id="floatkey"></div>
+
 	<script src="ncw.js"></script>
 
 </body>
