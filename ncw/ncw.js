@@ -58,30 +58,69 @@ function mouseReleased()
     
 }
 
+function placeLetter(element)
+{
+	element.innerHTML = curLetter;
+	element.style.opacity = 1.0;
+	unhoverLetterspace(element);
+}
+
 function updateFloatKey(event)
 {
     floatkey.style.top = `${event.clientY}px`;
     floatkey.style.left = `${event.clientX}px`;
 }
 
+//https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+function mulberry32(a) {
+  return function() {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+
 function setup()
-{
+{	
     document.addEventListener("mouseup", mouseReleased);
     document.addEventListener("mousemove", updateFloatKey);
 
+	var date = new Date();
+	var seed = date.getDate()*1000000 + date.getMonth() * 10000 + date.getFullYear();
+
+	let rando = mulberry32(seed);
+	
     const elements = document.getElementsByClassName("key");
+	
+	var randomLetter = Math.floor(rando()*elements.length);
+	var chosenLetter = "";
     for(let i = 0; i < elements.length; i++)
     {
         elements[i].addEventListener("mousedown", function(){buttonClicked(elements[i])});
         elements[i].addEventListener("pointerenter", function(){hoverKey(elements[i])});
         elements[i].addEventListener("pointerleave", function(){unhoverKey(elements[i])});
+		
+		if(randomLetter == i)
+		{
+			chosenLetter = elements[i].innerHTML;
+			
+			buttonClicked(elements[i]);
+		}
     }
 
+	var randomPosition = Math.floor(rando()*letterEntries.length);
     for(let i = 0; i < letterEntries.length; i++)
     {
         letterEntries[i].addEventListener("pointerenter", function(){hoverLetterspace(letterEntries[i])});
         letterEntries[i].addEventListener("pointerleave", function(){unhoverLetterspace(letterEntries[i])});
-    }
+		
+		if(randomPosition == i)
+		{
+			hoverLetterspace(letterEntries[i]);
+			mouseReleased();
+		}
+    }	
 }
 
 function hoverKey(element)
@@ -163,6 +202,11 @@ function getLetter(id)
     return document.getElementById(id).innerHTML;
 }
 
+function getLetterGrid()
+{
+	return `${getLetter("tl")}|${getLetter("tm")}|${getLetter("tr")}\n${getLetter("ml")}|${getLetter("mm")}|${getLetter("mr")}\n${getLetter("bl")}|${getLetter("bm")}|${getLetter("br")}\n`;
+}
+
 function scoreBoard()
 {
     var words = getWords();
@@ -182,10 +226,12 @@ function scoreBoard()
     
     var scoreDisplay = document.getElementById("score");
     scoreDisplay.innerHTML = `Game Over! you scored: ${score}`;
-    //scoreDisplay.innerHTML += `<br><a onclick="copyShareString()">SHARE!</a>`;
+    scoreDisplay.innerHTML += `<br><a onclick="copyShareString()">SHARE!</a>`;
     scoreDisplay.style.display = "flex";
 
     document.getElementById("keyboard").style.display = "none";
+	
+	shareString = `I scored ${score} points in Noughts and Crosswords!\n${getLetterGrid()}\nwww.bitloomgames.com/ncw`;
 }
 
 function checkWord(word)
@@ -200,7 +246,7 @@ function checkWord(word)
             score += 1;
         }
     }
-    //console.log(`${word} scores ${score}`);
+	
     return score;
 }
 

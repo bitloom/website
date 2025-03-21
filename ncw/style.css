@@ -42,15 +42,14 @@ hr
 
 #header
 {
-	/*padding-top:25px;*/
-  font-size:5vw;
 	flex: 0 1 10%;
 }
 
-h2
+h1
 {
-  margin-bottom: 2%;
-  margin-top: 2%;
+	font-size:5vmin;
+	margin-bottom: 2%;
+	margin-top: 2%;
 }
 
 p
@@ -152,65 +151,20 @@ p
   font-size:1em;
   padding: 5px;
   width:100%;
+  height:100%;
   opacity: 0;
   user-select: none;
-}
-
-.scorespace.l
-{
   align-items: center;
-  justify-content: right;
-}
-
-.scorespace.r
-{
-  align-items: center;
-  justify-content: left;
-}
-
-.scorespace.t
-{
-  align-items:flex-end;
   justify-content: center;
-}
-
-.scorespace.b
-{
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.scorespace.bl
-{
-  align-items: flex-start;
-  justify-content: right;
-}
-
-.scorespace.br
-{
-  align-items: flex-start;
-  justify-content: left;
-}
-
-.scorespace.tl
-{
-  align-items: flex-end;
-  justify-content: right;
-}
-
-.scorespace.tr
-{
-  align-items: flex-end;
-  justify-content: left;
 }
 
 /*game over*/
 #score
 {
   display: none;
-  height: var(--keysize);
-  padding-top: var(--keysize);
-  padding-bottom: var(--keysize);
+  min-height: var(--keysize);
+  /*padding-top: var(--keysize);
+  padding-bottom: var(--keysize);*/
   background: whitesmoke;
   border-radius: 5vh;
   color: var(--purple);
@@ -222,4 +176,6 @@ p
 
   width:100%;
   max-width: 700px;
+  
+  user-select: none;
 }
