@@ -4,48 +4,6 @@
   src: url(../fonts/phontOG20.ttf) format("truetype");
 }
 
-@keyframes WarpIn
-{
-  0%    {width: 0%; opacity: 0}
-  50%   {width: 100%; opacity: 100%}
-  75%   {width: 90%;}
-  100%  {width: 100%;}
-}
-
-@keyframes LogoWarp
-{
-  0%    {rotate: -45deg; opacity: 0}
-  50%   {rotate: 15deg; }
-  100%  {rotate:0; opacity: 100%;}
-}
-
-@keyframes TaglinePopIn 
-{
-  0%    {opacity: 0;}
-  100%  {opacity: 100%; }
-}
-
-@keyframes SelectItem
-{
-  0%    {border-radius: 0; }
-  100%  {border-radius: 25px; }
-}
-
-@keyframes ButtonRotate
-{
-  0%    {rotate: 0deg;}
-  25%   {rotate: 5deg;}
-  50%   {rotate: 0deg;}
-  75%   {rotate: -5deg;}
-  100%  {rotate: 0deg;}
-}
-
-@keyframes LogoTextWarpIn
-{
-  0%  {opacity: 0;}
-  90% {opacity: 100%;}
-}
-
 :root
 {
   --purple: #7f4ea7;
@@ -84,9 +42,22 @@ hr
 
 #header
 {
-	padding-top:25px;
+	/*padding-top:25px;*/
   font-size:5vw;
 	flex: 0 1 10%;
+}
+
+h2
+{
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+p
+{
+  font-size: small;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #game
@@ -128,6 +99,7 @@ hr
 /*keyboard*/
 #keyboard
 {  
+  display:inline;
   width:100%;
   max-width: 700px;
 }
@@ -181,6 +153,7 @@ hr
   padding: 5px;
   width:100%;
   opacity: 0;
+  user-select: none;
 }
 
 .scorespace.l
@@ -203,19 +176,19 @@ hr
 
 .scorespace.b
 {
-  align-items: top;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .scorespace.bl
 {
-  align-items: top;
+  align-items: flex-start;
   justify-content: right;
 }
 
 .scorespace.br
 {
-  align-items: top;
+  align-items: flex-start;
   justify-content: left;
 }
 
@@ -229,4 +202,24 @@ hr
 {
   align-items: flex-end;
   justify-content: left;
+}
+
+/*game over*/
+#score
+{
+  display: none;
+  height: var(--keysize);
+  padding-top: var(--keysize);
+  padding-bottom: var(--keysize);
+  background: whitesmoke;
+  border-radius: 5vh;
+  color: var(--purple);
+
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 15px;
+
+  width:100%;
+  max-width: 700px;
 }

@@ -7,6 +7,8 @@ var curLetter = "";
 var returnKey = null;
 var hoveredLetterspace = null;
 
+var shareString = "";
+
 function buttonClicked(element)
 {
     if(element == null || element.innerHTML == "")
@@ -42,7 +44,7 @@ function mouseReleased()
 
         if(checkGameEnd())
         {
-            console.log(getWords());
+            scoreBoard();
         }
     }
     else if (returnKey != null)
@@ -70,7 +72,6 @@ function setup()
     const elements = document.getElementsByClassName("key");
     for(let i = 0; i < elements.length; i++)
     {
-        //console.log("element setting up... " + elements[i].innerHTML);
         elements[i].addEventListener("mousedown", function(){buttonClicked(elements[i])});
         elements[i].addEventListener("pointerenter", function(){hoverKey(elements[i])});
         elements[i].addEventListener("pointerleave", function(){unhoverKey(elements[i])});
@@ -135,25 +136,24 @@ function getWords()
 {
     let returnObject = {}
 
-    returnObject.topLeft = `${getLetter("tl")}${getLetter("tm")}${getLetter("tr")}`;
-    returnObject.topRight = `${getLetter("tr")}${getLetter("tm")}${getLetter("tl")}`;
-    returnObject.midLeft = `${getLetter("ml")}${getLetter("mm")}${getLetter("mr")}`;
-    returnObject.midRight =  `${getLetter("mr")}${getLetter("mm")}${getLetter("ml")}`;
-    returnObject.bottomLeft = `${getLetter("bl")}${getLetter("bm")}${getLetter("br")}`;
-    returnObject.bottomRight = `${getLetter("br")}${getLetter("bm")}${getLetter("bl")}`;
+    returnObject.rtl = `${getLetter("tl")}${getLetter("tm")}${getLetter("tr")}`;
+    returnObject.rtr = `${getLetter("tr")}${getLetter("tm")}${getLetter("tl")}`;
+    returnObject.rml = `${getLetter("ml")}${getLetter("mm")}${getLetter("mr")}`;
+    returnObject.rmr =  `${getLetter("mr")}${getLetter("mm")}${getLetter("ml")}`;
+    returnObject.rbl = `${getLetter("bl")}${getLetter("bm")}${getLetter("br")}`;
+    returnObject.rbr = `${getLetter("br")}${getLetter("bm")}${getLetter("bl")}`;
 
-    returnObject.leftDown = `${getLetter("tl")}${getLetter("ml")}${getLetter("bl")}`;
-    returnObject.leftUp = `${getLetter("bl")}${getLetter("ml")}${getLetter("tl")}`;
-    returnObject.midDown = `${getLetter("tm")}${getLetter("mm")}${getLetter("bm")}`;
-    returnObject.midUp = `${getLetter("bm")}${getLetter("mm")}${getLetter("tm")}`;
-    returnObject.rightDown = `${getLetter("tr")}${getLetter("mr")}${getLetter("br")}`;
-    returnObject.rightUp = `${getLetter("br")}${getLetter("mr")}${getLetter("tr")}`;
+    returnObject.ctl = `${getLetter("tl")}${getLetter("ml")}${getLetter("bl")}`;
+    returnObject.cbl = `${getLetter("bl")}${getLetter("ml")}${getLetter("tl")}`;
+    returnObject.ctm = `${getLetter("tm")}${getLetter("mm")}${getLetter("bm")}`;
+    returnObject.cbm = `${getLetter("bm")}${getLetter("mm")}${getLetter("tm")}`;
+    returnObject.ctr = `${getLetter("tr")}${getLetter("mr")}${getLetter("br")}`;
+    returnObject.cbr = `${getLetter("br")}${getLetter("mr")}${getLetter("tr")}`;
 
-    returnObject.diagTL = `${getLetter("tl")}${getLetter("mm")}${getLetter("br")}`;
-    returnObject.diagBR = `${getLetter("br")}${getLetter("mm")}${getLetter("tl")}`;
-    returnObject.diagTR = `${getLetter("tr")}${getLetter("mm")}${getLetter("bl")}`;
-    returnObject.diagBL = `${getLetter("bl")}${getLetter("mm")}${getLetter("tr")}`;
-
+    returnObject.dtl = `${getLetter("tl")}${getLetter("mm")}${getLetter("br")}`;
+    returnObject.dbr = `${getLetter("br")}${getLetter("mm")}${getLetter("tl")}`;
+    returnObject.dtr = `${getLetter("tr")}${getLetter("mm")}${getLetter("bl")}`;
+    returnObject.dbl = `${getLetter("bl")}${getLetter("mm")}${getLetter("tr")}`;
 
     return returnObject;
 }
@@ -163,5 +163,50 @@ function getLetter(id)
     return document.getElementById(id).innerHTML;
 }
 
+function scoreBoard()
+{
+    var words = getWords();
+
+    var score = 0;
+
+    Object.keys(words).forEach(key => 
+        {
+            var addScore = checkWord(words[key]);
+            var scoreElement = document.getElementById(key);
+            scoreElement.innerHTML = addScore;
+            scoreElement.style.opacity = 1.0;
+            document.getElementById(key).innerHTML 
+            score += addScore
+
+        });
+    
+    var scoreDisplay = document.getElementById("score");
+    scoreDisplay.innerHTML = `Game Over! you scored: ${score}`;
+    //scoreDisplay.innerHTML += `<br><a onclick="copyShareString()">SHARE!</a>`;
+    scoreDisplay.style.display = "flex";
+
+    document.getElementById("keyboard").style.display = "none";
+}
+
+function checkWord(word)
+{
+    word = word.toUpperCase();
+    var score = 0;
+    if(dict.includes(word))
+    {
+        score += 1;
+        if(word.includes("X"))
+        {
+            score += 1;
+        }
+    }
+    //console.log(`${word} scores ${score}`);
+    return score;
+}
+
+function copyShareString()
+{
+    console.log(shareString);
+}
 
 setup();
