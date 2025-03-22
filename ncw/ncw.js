@@ -223,15 +223,12 @@ function scoreBoard()
             score += addScore
 
         });
-    
-    var scoreDisplay = document.getElementById("score");
-    scoreDisplay.innerHTML = `Game Over! you scored: ${score}`;
-    scoreDisplay.innerHTML += `<br><a onclick="copyShareString()">SHARE!</a>`;
-    scoreDisplay.style.display = "flex";
+    document.getElementById("score").style.display = "flex";
+    document.getElementById("scoreText").innerHTML = `Game Over! you scored: ${score}`;
 
     document.getElementById("keyboard").style.display = "none";
 	
-	shareString = `I scored ${score} points in Noughts and Crosswords!\n${getLetterGrid()}\nwww.bitloomgames.com/ncw`;
+	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid()}\nwww.bitloomgames.com/ncw`;
 }
 
 function checkWord(word)
@@ -252,7 +249,9 @@ function checkWord(word)
 
 function copyShareString()
 {
-    console.log(shareString);
+    navigator.clipboard.writeText(shareString);
+	
+	//show copied message!
 }
 
 setup();

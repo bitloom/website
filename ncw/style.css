@@ -8,7 +8,7 @@
 {
   --purple: #7f4ea7;
   --keysize: 40px;
-  --keypadding: 20px;
+  --keypadding: 5px;
 }
 
 html, body
@@ -107,7 +107,7 @@ p
 {
   display:flex;
   flex: 1 1 auto;
-  margin-bottom: 5px;
+  margin-bottom: var(--keypadding);
   justify-content: center;
 }
 
@@ -162,9 +162,8 @@ p
 #score
 {
   display: none;
-  min-height: var(--keysize);
-  /*padding-top: var(--keysize);
-  padding-bottom: var(--keysize);*/
+  min-height: calc((var(--keysize) + var(--keypadding)) * 3);
+  
   background: whitesmoke;
   border-radius: 5vh;
   color: var(--purple);
@@ -178,4 +177,6 @@ p
   max-width: 700px;
   
   user-select: none;
+  
+  flex-flow:column;
 }
