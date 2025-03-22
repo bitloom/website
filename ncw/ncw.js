@@ -2,6 +2,8 @@ const floatkey = document.getElementById("floatkey");
 
 const letterEntries = document.getElementsByClassName("letterspace");
 
+const cursorOffset = 10;
+
 var curLetter = "";
 
 var returnKey = null;
@@ -67,12 +69,13 @@ function placeLetter(element)
 
 function updateFloatKey(event)
 {
-    floatkey.style.top = `${event.clientY}px`;
-    floatkey.style.left = `${event.clientX}px`;
+    floatkey.style.top = `${event.clientY+cursorOffset}px`;
+    floatkey.style.left = `${event.clientX+cursorOffset}px`;
 }
 
 //https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
-function mulberry32(a) {
+function mulberry32(a) 
+{
   return function() {
     let t = a += 0x6D2B79F5;
     t = Math.imul(t ^ t >>> 15, t | 1);
@@ -91,21 +94,21 @@ function setup()
 
 	let rando = mulberry32(seed);
 	
-    const elements = document.getElementsByClassName("key");
+    const keyboard = document.getElementsByClassName("key");
 	
-	var randomLetter = Math.floor(rando()*elements.length);
+	var randomLetter = Math.floor(rando()*keyboard.length);
 	var chosenLetter = "";
-    for(let i = 0; i < elements.length; i++)
+    for(let i = 0; i < keyboard.length; i++)
     {
-        elements[i].addEventListener("mousedown", function(){buttonClicked(elements[i])});
-        elements[i].addEventListener("pointerenter", function(){hoverKey(elements[i])});
-        elements[i].addEventListener("pointerleave", function(){unhoverKey(elements[i])});
+        keyboard[i].addEventListener("mousedown", function(){buttonClicked(keyboard[i])});
+        keyboard[i].addEventListener("pointerenter", function(){hoverKey(keyboard[i])});
+        keyboard[i].addEventListener("pointerleave", function(){unhoverKey(keyboard[i])});
 		
 		if(randomLetter == i)
 		{
-			chosenLetter = elements[i].innerHTML;
+			chosenLetter = keyboard[i].innerHTML;
 			
-			buttonClicked(elements[i]);
+			buttonClicked(keyboard[i]);
 		}
     }
 
@@ -120,7 +123,14 @@ function setup()
 			hoverLetterspace(letterEntries[i]);
 			mouseReleased();
 		}
-    }	
+    }
+	
+	/*const scoreSpaces = document.getElementsByClassName("scorespace");
+	for(let i = 0; i < scoreSpaces.length; i++)
+	{
+		scoreSpaces[i].addEventListener("pointerenter", function(){hoverScore(scoreSpaces[i])});
+        scoreSpaces[i].addEventListener("pointerleave", function(){unhoverScore(scoreSpaces[i])});
+	}*/
 }
 
 function hoverKey(element)
@@ -157,6 +167,25 @@ function unhoverLetterspace(element)
     }
     hoveredLetterspace = null;
 }
+
+/*function hoverScore(element)
+{
+    if(element.innerHTML != "0" && element.style.opacity != "0")
+    {
+        floatkey.style.display = "flex";
+		floatkey.innerHTML = 
+    }
+}
+
+function unhoverScore(element)
+{
+    if(element.innerHTML == "")
+    {
+        element.style.background = "none"
+        element.style.opacity = "1.0";
+    }
+    hoveredLetterspace = null;
+}*/
 
 function checkGameEnd()
 {
@@ -219,6 +248,7 @@ function scoreBoard()
             var scoreElement = document.getElementById(key);
             scoreElement.innerHTML = addScore;
             scoreElement.style.opacity = 1.0;
+			scoreElement.style.fontsize = addScore > 0.0 ? `2em` : `1em`;
             document.getElementById(key).innerHTML 
             score += addScore
 
@@ -252,6 +282,97 @@ function copyShareString()
     navigator.clipboard.writeText(shareString);
 	
 	//show copied message!
+	if (animatingNotify == false)
+	{
+		requestAnimationFrame((t)=>animateNotifyIn(t));
+	}
+}
+
+//Animation
+function easeOutBack(x)
+{
+	const c1 = 1.70158;
+	const c3 = c1 + 1;
+
+	return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+}
+
+function easeInOutQuad(x) 
+{
+	return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+}
+
+
+let notifyStart;
+let animatingNotify = false;
+const notifyDuration = 500.0;
+const notifyStay = 500.0;
+
+function animateNotifyIn(timestamp)
+{
+	if(notifyStart === undefined)
+	{
+		animatingNotify = true;
+		notifyStart = timestamp;
+	}
+	
+	let t = (timestamp-notifyStart)/notifyDuration;
+	t = Math.max(0.0, Math.min(t, 1.0));
+	
+	let et = easeOutBack(t);
+	setNotifyPosition(et);
+	
+	if(t < 1.0)
+	{
+		requestAnimationFrame((time)=>animateNotifyIn(time));
+	}
+	else
+	{
+		notifyStart = undefined;
+		setTimeout(()=>{requestAnimationFrame((time)=>animateNotifyOut(time))}, notifyStay);
+	}
+}
+
+function animateNotifyOut(timestamp)
+{
+	if(notifyStart === undefined)
+	{
+		notifyStart = timestamp;
+	}
+	
+	let t = (timestamp-notifyStart)/notifyDuration;
+	t = Math.max(0.0, Math.min(t, 1.0));
+	
+	let et = easeOutBack(1.0-t);
+	setNotifyPosition(et);
+	
+	if(t < 1.0)
+	{
+		requestAnimationFrame((time)=>animateNotifyOut(time));
+	}
+	else
+	{
+		notifyStart = undefined;
+		animatingNotify = false;
+	}
+}
+
+function setNotifyPosition(t)
+{
+	let element = document.getElementById("notification");
+	
+	element.style.opacity = `${t}`;
+	
+	let scoreRect = document.getElementById("score").getBoundingClientRect();
+	let notifyRect = element.getBoundingClientRect();
+	
+	let top = scoreRect.top - (notifyRect.height+10) * t;
+	
+	let mid = scoreRect.left + (scoreRect.width)*0.5;
+	let w = (notifyRect.width)*0.5;
+	
+	element.style.top = `${top}px`;
+	element.style.left = `${mid-w}px`;
 }
 
 setup();

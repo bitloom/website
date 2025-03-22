@@ -13,31 +13,31 @@
 
 html, body
 {
-  background-color: var(--purple);
-  font-weight: lighter;
-  font-family: phont;
-  color: #ffffff;
-  width: inherit;
-  height:100%;
-  margin: 0;
-  text-align: center;
+	background-color: var(--purple);
+	font-weight: lighter;
+	font-family: phont;
+	color: #ffffff;
+	width: inherit;
+	height:100%;
+	margin: 0;
+	text-align: center;
 }
 
 #container
 {
-  display:flex;
-  flex-flow: column;
-  height:100%;
-  width:100%;
-  align-items:stretch;
-  align-content: center;
+	display:flex;
+	flex-flow: column;
+	height:100%;
+	width:100%;
+	align-items:stretch;
+	align-content: center;
 }
 
 hr
 {
-  color: WHITESMOKE;
-  width: 99%;
-  margin-bottom:0;
+	color: WHITESMOKE;
+	width: 99%;
+	margin-bottom:0;
 }
 
 #header
@@ -54,108 +54,129 @@ h1
 
 p
 {
-  font-size: small;
-  margin-top: 5px;
-  margin-bottom: 5px;
+	font-size: small;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+a
+{
+	background:var(--purple);
+	color: whitesmoke;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+a:hover
+{
+	background: hsl(from var(--purple) h s calc(l + 20));
+}
+
+a:active
+{
+	background: hsl(from var(--purple) h s calc(l - 10));
 }
 
 #game
 {
+	width: 100%;
+	max-width: 500px;
+	/* vertical align in screen*/
 	flex: 1 1 auto;
-  align-content: center;
-  align-self:center;
+	align-content: center;
+	align-self:center;
 }
 
 /*word grid*/
 #wordgrid
 {
-  display:grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
-  grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
-  width:100%;
-  max-width: 700px;
-  
-  justify-items: center;
+	display:grid;
+	grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
+	grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+	gap: 10px 10px;
+	width:100%;
 }
 
 .letterspace
 {
-  border: solid whitesmoke;
-  border-width: 2px;
-  border-radius: 25%;
-  width: 100px;
-  height:100px;
-  margin:5px;
-  color: var(--purple);
+	border: solid whitesmoke;
+	border-width: 2px;
+	border-radius: 25%;
+	/*width: 100px;
+	height:100px;*/
+	aspect-ratio: 1;
+	
+	color: var(--purple);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3em;
-  user-select:none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	font-size: 3em;
+	user-select:none;
 }
 
 /*keyboard*/
 #keyboard
 {  
-  display:inline;
-  width:100%;
-  max-width: 700px;
+	display:inline;
+	width:100%;
+	max-width: 700px;
+	margin-top: var(--keypadding);
 }
 
 .keyrow
 {
-  display:flex;
-  flex: 1 1 auto;
-  margin-bottom: var(--keypadding);
-  justify-content: center;
+	display:flex;
+	flex: 1 1 auto;
+	margin-bottom: var(--keypadding);
+	justify-content: center;
 }
 
 .key
 {
-  display: flex;
+	display: flex;
 
-  justify-content: center;
-  align-items: center;
+	justify-content: center;
+	align-items: center;
 
-  border-radius: 5px;
-  border: solid whitesmoke 2px;
-  width: var(--keysize);
-  height:var(--keysize);
-  background: none;
-  color:whitesmoke;
-  user-select: none;
-  margin-right: 2.5px;
-  margin-left: 2.5px;
+	border-radius: 5px;
+	border: solid whitesmoke 2px;
+	width: var(--keysize);
+	height:var(--keysize);
+	background: none;
+	color:whitesmoke;
+	user-select: none;
+	margin-right: 2.5px;
+	margin-left: 2.5px;
 }
 
 #floatkey
 {
-  border-radius: 5px;
-  width: var(--keysize);
-  height:var(--keysize);
-  background: whitesmoke;
-  color:var(--purple);
-  position:absolute;
-  
-  justify-content: center;
-  align-items: center;
+	border-radius: 5px;
+	width: var(--keysize);
+	height:var(--keysize);
+	background: whitesmoke;
+	color:var(--purple);
+	position:absolute;
 
-  display:none;
+	justify-content: center;
+	align-items: center;
+
+	display:none;
 }
 
 /*score spaces*/
 .scorespace
 {
-  display:flex;
-  font-size:1em;
-  padding: 5px;
-  width:100%;
-  height:100%;
-  opacity: 0;
-  user-select: none;
-  align-items: center;
-  justify-content: center;
+	display:flex;
+	font-size:1em;
+	width:100%;
+	height:100%;
+	/*opacity: 0;*/
+	user-select: none;
+	align-items: center;
+	justify-content: center;
 }
 
 /*game over*/
@@ -174,9 +195,20 @@ p
   margin-top: 15px;
 
   width:100%;
-  max-width: 700px;
   
   user-select: none;
   
   flex-flow:column;
+}
+
+#notification
+{
+	background:whitesmoke;
+	color: var(--purple);
+	border-radius: 10px;
+	padding: 10px;
+	position:absolute;
+	display:block;
+	top:0;
+	opacity:0;
 }
