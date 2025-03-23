@@ -44,7 +44,12 @@ function mouseReleased()
         hoveredLetterspace.style.opacity = 1.0;
         unhoverLetterspace(hoveredLetterspace);
 
-        if(checkGameEnd())
+        if(animators <= 0)
+		{
+			checkScore();
+		}
+		
+		if(checkGameEnd())
         {
             scoreBoard();
         }
@@ -122,15 +127,10 @@ function setup()
 		{
 			hoverLetterspace(letterEntries[i]);
 			mouseReleased();
+			
+			animateLetter(letterEntries[i], 0);
 		}
     }
-	
-	/*const scoreSpaces = document.getElementsByClassName("scorespace");
-	for(let i = 0; i < scoreSpaces.length; i++)
-	{
-		scoreSpaces[i].addEventListener("pointerenter", function(){hoverScore(scoreSpaces[i])});
-        scoreSpaces[i].addEventListener("pointerleave", function(){unhoverScore(scoreSpaces[i])});
-	}*/
 }
 
 function hoverKey(element)
@@ -168,25 +168,6 @@ function unhoverLetterspace(element)
     hoveredLetterspace = null;
 }
 
-/*function hoverScore(element)
-{
-    if(element.innerHTML != "0" && element.style.opacity != "0")
-    {
-        floatkey.style.display = "flex";
-		floatkey.innerHTML = 
-    }
-}
-
-function unhoverScore(element)
-{
-    if(element.innerHTML == "")
-    {
-        element.style.background = "none"
-        element.style.opacity = "1.0";
-    }
-    hoveredLetterspace = null;
-}*/
-
 function checkGameEnd()
 {
     for(let i = 0; i < letterEntries.length; i++)
@@ -207,7 +188,7 @@ function getWords()
     returnObject.rtl = `${getLetter("tl")}${getLetter("tm")}${getLetter("tr")}`;
     returnObject.rtr = `${getLetter("tr")}${getLetter("tm")}${getLetter("tl")}`;
     returnObject.rml = `${getLetter("ml")}${getLetter("mm")}${getLetter("mr")}`;
-    returnObject.rmr =  `${getLetter("mr")}${getLetter("mm")}${getLetter("ml")}`;
+    returnObject.rmr = `${getLetter("mr")}${getLetter("mm")}${getLetter("ml")}`;
     returnObject.rbl = `${getLetter("bl")}${getLetter("bm")}${getLetter("br")}`;
     returnObject.rbr = `${getLetter("br")}${getLetter("bm")}${getLetter("bl")}`;
 
@@ -226,14 +207,79 @@ function getWords()
     return returnObject;
 }
 
+function getWordIds(key)
+{
+    switch(key)
+	{
+		case "rtl": return ["tl","tm", "tr"];
+		case "rtr": return ["tr","tm", "tl"];
+		case "rml": return ["ml","mm", "mr"];
+		case "rmr": return ["mr","mm", "ml"];
+		case "rbl": return ["bl","bm", "br"];
+		case "rbr": return ["br","bm", "bl"];
+
+		case "ctl": return ["tl", "ml", "bl"];
+		case "cbl": return ["bl", "ml", "tl"];
+		case "ctm": return ["tm", "mm", "bm"];
+		case "cbm": return ["bm", "mm", "tm"];
+		case "ctr": return ["tr", "mr", "br"];
+		case "cbr": return ["br", "mr", "tr"];
+
+		case "dtl": return ["tl", "mm", "br"];
+		case "dbr": return ["br", "mm", "tl"];
+		case "dtr": return ["tr", "mm", "bl"];
+		case "dbl": return ["bl", "mm", "tr"];
+	}
+}
+
 function getLetter(id)
 {
     return document.getElementById(id).innerHTML;
 }
 
+function getElement(id)
+{
+	return document.getElementById(id);
+}
+
 function getLetterGrid()
 {
 	return `${getLetter("tl")}|${getLetter("tm")}|${getLetter("tr")}\n${getLetter("ml")}|${getLetter("mm")}|${getLetter("mr")}\n${getLetter("bl")}|${getLetter("bm")}|${getLetter("br")}\n`;
+}
+
+function checkScore()
+{
+	var words = getWords();
+	
+	let delay = 0;
+	const keys = Object.keys(words);
+	for(let i = 0; i < keys.length; i++)
+	{
+		let key = keys[i];
+		if(words[key].length < 3)
+		{
+			continue;
+		}
+		
+		let scoreElement = document.getElementById(key);
+		
+		//only check scores that havent been set
+		if (scoreElement.innerHTML == "")
+		{
+			var addScore = checkWord(words[key]);
+			scoreElement.innerHTML = addScore > 0 ? addScore : "0";
+			
+			scoreElement.classList.add(addScore > 0 ? "scoreGood" : "scoreBad");
+			scoreElement.style.animationDelay = `${delay*letterPopDelay}s`
+			delay++;
+			
+			if(addScore > 0)
+			{
+				animateWord(getWordIds(key));
+				break;
+			}
+		}
+	}
 }
 
 function scoreBoard()
@@ -245,13 +291,9 @@ function scoreBoard()
     Object.keys(words).forEach(key => 
         {
             var addScore = checkWord(words[key]);
-            var scoreElement = document.getElementById(key);
-            scoreElement.innerHTML = addScore;
-            scoreElement.style.opacity = 1.0;
-			scoreElement.style.fontsize = addScore > 0.0 ? `2em` : `1em`;
-            document.getElementById(key).innerHTML 
-            score += addScore
-
+			
+			score += addScore
+			
         });
     document.getElementById("score").style.display = "flex";
     document.getElementById("scoreText").innerHTML = `Game Over! you scored: ${score}`;
@@ -296,12 +338,6 @@ function easeOutBack(x)
 
 	return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
 }
-
-function easeInOutQuad(x) 
-{
-	return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
-}
-
 
 let notifyStart;
 let animatingNotify = false;
@@ -373,6 +409,42 @@ function setNotifyPosition(t)
 	
 	element.style.top = `${top}px`;
 	element.style.left = `${mid-w}px`;
+}
+
+const letterPopTime = 0.5;
+const letterPopDelay = 0.25;
+
+let animators = 0
+
+function animateLetter(element, delay)
+{
+	if(animators < 0)
+	{
+		animators = 0;
+	}
+	animators++;
+	element.style.animation = `${letterPopTime}s ease-in-out ${delay}s letterPop`;
+	element.addEventListener("animationend", letterAnimationFinished);
+}
+
+function letterAnimationFinished(event)
+{
+	animators--;
+	//console.log(`finished animating ${element.innerHTML} - animators: ${animators}`);
+	this.style.animation = "";
+	
+	if(animators <= 0)
+	{
+		setTimeout(checkScore);
+	}
+}
+
+function animateWord(letterIds)
+{
+	for(let i=0; i < letterIds.length; i++)
+	{
+		animateLetter(document.getElementById(letterIds[i]), letterPopDelay*i);
+	}
 }
 
 setup();
