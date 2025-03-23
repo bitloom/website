@@ -96,8 +96,8 @@ function mulberry32(a)
 
 function setup()
 {	
-    document.addEventListener("mouseup", mouseReleased);
-    document.addEventListener("mousemove", updateFloatKey);
+    document.addEventListener("pointerup", mouseReleased);
+    document.addEventListener("pointermove", updateFloatKey);
 
 	var date = new Date();
 	var seed = date.getDate()*1000000 + date.getMonth() * 10000 + date.getFullYear();
@@ -118,7 +118,7 @@ function setup()
 	
     for(let i = 0; i < keyboard.length; i++)
     {
-        keyboard[i].addEventListener("mousedown", function(){buttonClicked(keyboard[i])});
+        keyboard[i].addEventListener("pointerdown", function(){buttonClicked(keyboard[i])});
         keyboard[i].addEventListener("pointerenter", function(){hoverKey(keyboard[i])});
         keyboard[i].addEventListener("pointerleave", function(){unhoverKey(keyboard[i])});
 		
