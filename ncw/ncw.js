@@ -374,7 +374,7 @@ function scoreBoard()
 
     document.getElementById("keyboard").style.display = "none";
 	
-	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nwww.bitloomgames.com/ncw`;
+	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nhttps://www.bitloomgames.com/ncw`;
 }
 
 function checkWord(word)
