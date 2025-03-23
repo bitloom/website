@@ -46,8 +46,7 @@ function mouseReleased()
         hoveredLetterspace.innerHTML = curLetter;
         hoveredLetterspace.style.opacity = 1.0;
         unhoverLetterspace(hoveredLetterspace);
-
-		console.log(getLetterGrid(false));
+		
 		localStorage.setItem(saveKey, getLetterGrid(false));
 		
         if(animators <= 0)
@@ -371,7 +370,7 @@ function scoreBoard()
 			
         });
     document.getElementById("score").style.display = "flex";
-    document.getElementById("scoreText").innerHTML = `Game Over! you scored: ${score}`;
+    document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score}`;
 
     document.getElementById("keyboard").style.display = "none";
 	

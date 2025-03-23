@@ -59,7 +59,7 @@ p
 	margin-bottom: 5px;
 }
 
-a
+a#share
 {
 	background:var(--purple);
 	color: whitesmoke;
@@ -67,14 +67,24 @@ a
 	padding: 10px;
 }
 
-a:hover
+a#share:hover
 {
 	background: hsl(from var(--purple) h s calc(l + 20));
 }
 
-a:active
+a#share:active
 {
 	background: hsl(from var(--purple) h s calc(l - 10));
+}
+
+a
+{
+	color:white;
+}
+
+footer
+{
+	font-size:0.75em;
 }
 
 #game
