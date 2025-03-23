@@ -1,6 +1,7 @@
 const floatkey = document.getElementById("floatkey");
 
 const letterEntries = document.getElementsByClassName("letterspace");
+const keyboard = document.getElementsByClassName("key");
 
 const cursorOffset = 10;
 
@@ -10,6 +11,8 @@ var returnKey = null;
 var hoveredLetterspace = null;
 
 var shareString = "";
+
+var saveKey;
 
 function buttonClicked(element)
 {
@@ -44,6 +47,9 @@ function mouseReleased()
         hoveredLetterspace.style.opacity = 1.0;
         unhoverLetterspace(hoveredLetterspace);
 
+		console.log(getLetterGrid(false));
+		localStorage.setItem(saveKey, getLetterGrid(false));
+		
         if(animators <= 0)
 		{
 			checkScore();
@@ -96,20 +102,35 @@ function setup()
 
 	var date = new Date();
 	var seed = date.getDate()*1000000 + date.getMonth() * 10000 + date.getFullYear();
-
-	let rando = mulberry32(seed);
+	saveKey = seed;
+	let progress = localStorage.getItem(saveKey);
 	
-    const keyboard = document.getElementsByClassName("key");
+	if(progress != null && progress == "")
+	{
+		progress = null;
+	}
+	
+	console.log(progress);
+	
+	let rando = mulberry32(seed);
 	
 	var randomLetter = Math.floor(rando()*keyboard.length);
 	var chosenLetter = "";
+	
     for(let i = 0; i < keyboard.length; i++)
     {
         keyboard[i].addEventListener("mousedown", function(){buttonClicked(keyboard[i])});
         keyboard[i].addEventListener("pointerenter", function(){hoverKey(keyboard[i])});
         keyboard[i].addEventListener("pointerleave", function(){unhoverKey(keyboard[i])});
 		
-		if(randomLetter == i)
+		if(progress != null)
+		{
+			if(progress.includes(keyboard[i].innerHTML))
+			{
+				keyboard[i].innerHTML = "";
+			}
+		}
+		else if(randomLetter == i)
 		{
 			chosenLetter = keyboard[i].innerHTML;
 			
@@ -123,7 +144,22 @@ function setup()
         letterEntries[i].addEventListener("pointerenter", function(){hoverLetterspace(letterEntries[i])});
         letterEntries[i].addEventListener("pointerleave", function(){unhoverLetterspace(letterEntries[i])});
 		
-		if(randomPosition == i)
+		if(progress != null)
+		{
+			let progressIndex = getLetterSpaceIndex(letterEntries[i].id);
+			if(progressIndex >= 0 && progressIndex < progress.length)
+			{
+				if(progress[progressIndex] != "_")
+				{
+					curLetter = progress[progressIndex];
+					hoverLetterspace(letterEntries[i]);
+					mouseReleased();
+					
+					animateLetter(letterEntries[i], 0);
+				}
+			}
+		}
+		else if(randomPosition == i)
 		{
 			hoverLetterspace(letterEntries[i]);
 			mouseReleased();
@@ -232,9 +268,37 @@ function getWordIds(key)
 	}
 }
 
+function getLetterSpaceIndex(id)
+{
+	switch(id)
+	{
+		case "tl": return 0;
+		case "tm": return 1;
+		case "tr": return 2;
+		case "ml": return 3;
+		case "mm": return 4;
+		case "mr": return 5;
+		case "bl": return 6;
+		case "bm": return 7;
+		case "br": return 8;
+	}
+	
+	return -1;
+}
+
 function getLetter(id)
 {
     return document.getElementById(id).innerHTML;
+}
+
+function getSaveLetter(id)
+{
+	let letter = document.getElementById(id).innerHTML;
+	if(letter == "")
+	{
+		letter = "_";
+	}
+	return letter;
 }
 
 function getElement(id)
@@ -242,9 +306,14 @@ function getElement(id)
 	return document.getElementById(id);
 }
 
-function getLetterGrid()
+function getLetterGrid(forShare)
 {
-	return `${getLetter("tl")}|${getLetter("tm")}|${getLetter("tr")}\n${getLetter("ml")}|${getLetter("mm")}|${getLetter("mr")}\n${getLetter("bl")}|${getLetter("bm")}|${getLetter("br")}\n`;
+	if(forShare)
+	{
+		return `${getLetter("tl")}|${getLetter("tm")}|${getLetter("tr")}\n${getLetter("ml")}|${getLetter("mm")}|${getLetter("mr")}\n${getLetter("bl")}|${getLetter("bm")}|${getLetter("br")}\n`;
+	}
+	
+	return `${getSaveLetter("tl")}${getSaveLetter("tm")}${getSaveLetter("tr")}${getSaveLetter("ml")}${getSaveLetter("mm")}${getSaveLetter("mr")}${getSaveLetter("bl")}${getSaveLetter("bm")}${getSaveLetter("br")}`;
 }
 
 function checkScore()
@@ -267,10 +336,16 @@ function checkScore()
 		if (scoreElement.innerHTML == "")
 		{
 			var addScore = checkWord(words[key]);
-			scoreElement.innerHTML = addScore > 0 ? addScore : "0";
+			scoreElement.innerHTML = addScore > 0 ? addScore : "X";
 			
 			scoreElement.classList.add(addScore > 0 ? "scoreGood" : "scoreBad");
 			scoreElement.style.animationDelay = `${delay*letterPopDelay}s`
+			
+			if(addScore <= 0)
+			{
+				scoreElement.addEventListener("animationend", scoreAnimationFinished);
+			}
+			
 			delay++;
 			
 			if(addScore > 0)
@@ -300,7 +375,7 @@ function scoreBoard()
 
     document.getElementById("keyboard").style.display = "none";
 	
-	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid()}\nwww.bitloomgames.com/ncw`;
+	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nwww.bitloomgames.com/ncw`;
 }
 
 function checkWord(word)
@@ -430,7 +505,6 @@ function animateLetter(element, delay)
 function letterAnimationFinished(event)
 {
 	animators--;
-	//console.log(`finished animating ${element.innerHTML} - animators: ${animators}`);
 	this.style.animation = "";
 	
 	if(animators <= 0)
@@ -444,6 +518,14 @@ function animateWord(letterIds)
 	for(let i=0; i < letterIds.length; i++)
 	{
 		animateLetter(document.getElementById(letterIds[i]), letterPopDelay*i);
+	}
+}
+
+function scoreAnimationFinished(event)
+{
+	if(this.innerHTML == "X")
+	{
+		this.innerHTML = "0";
 	}
 }
 
