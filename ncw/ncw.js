@@ -56,8 +56,8 @@ function setup()
     for(let i = 0; i < keyboard.length; i++)
     {
         keyboard[i].addEventListener("pointerdown", buttonClicked);
-        keyboard[i].addEventListener("mouseenter", keyOver);
-        keyboard[i].addEventListener("mouseleave", keyOut);
+        keyboard[i].addEventListener("pointerenter", keyOver);
+        keyboard[i].addEventListener("pointerleave", keyOut);
 		
 		if(progress != null)
 		{
@@ -70,7 +70,7 @@ function setup()
 		{
 			chosenLetter = keyboard[i].innerHTML;
 			
-			buttonClicked(keyboard[i]);
+			handleButtonClicked(keyboard[i]);
 		}
     }
 
@@ -90,7 +90,7 @@ function setup()
 				{
 					curLetter = progress[progressIndex];
 					hoverLetterspace(letterEntries[i]);
-					mouseReleased();
+					mouseReleased(null);
 					
 					animateLetter(letterEntries[i], 0);
 				}
@@ -99,7 +99,7 @@ function setup()
 		else if(randomPosition == i)
 		{
 			hoverLetterspace(letterEntries[i]);
-			mouseReleased();
+			mouseReleased(null);
 			
 			animateLetter(letterEntries[i], 0);
 		}
@@ -168,6 +168,7 @@ function mouseReleased(event)
 	
 	if(event && event.pointerType == "touch")
 	{
+		console.log("got touch event!");
 		return;
 	}
 
@@ -202,16 +203,22 @@ function mouseReleased(event)
 
 function keyOver(event)
 {
-	let element = event.target;
-	if(element.innerHTML != "" && curLetter == "")
-    {
-		hoverKey(element);
+	if(event.pointerType == "mouse")
+	{
+		let element = event.target;
+		if(element.innerHTML != "" && curLetter == "")
+		{
+			hoverKey(element);
+		}
 	}
 }
 
 function keyOut(event)
 {
-	unhoverKey(event.target);
+	if(event.pointerType == "mouse")
+	{
+		unhoverKey(event.target);
+	}
 }
 
 function hoverKey(element)
@@ -252,7 +259,6 @@ function touchLetterspace(event)
 	{
 		return;
 	}
-	
 	
 	if(curLetter != "" )
 	{
