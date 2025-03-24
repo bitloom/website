@@ -14,69 +14,6 @@ var shareString = "";
 
 var saveKey;
 
-function buttonClicked(element)
-{
-    if(element == null || element.innerHTML == "")
-    {
-        return;
-    }
-
-    if (curLetter == "")
-    {
-        curLetter = element.innerHTML;
-        element.innerHTML = "";
-        returnKey = element;
-
-        floatkey.style.display = "flex";
-        floatkey.innerHTML = curLetter;
-
-        unhoverKey(element);
-    }
-}
-
-function mouseReleased()
-{
-    if(curLetter == "")
-    {
-        return;
-    }
-
-    if(hoveredLetterspace != null)
-    {
-        hoveredLetterspace.innerHTML = curLetter;
-        hoveredLetterspace.style.opacity = 1.0;
-        unhoverLetterspace(hoveredLetterspace);
-		
-		localStorage.setItem(saveKey, getLetterGrid(false));
-		
-        if(animators <= 0)
-		{
-			checkScore();
-		}
-		
-		if(checkGameEnd())
-        {
-            scoreBoard();
-        }
-    }
-    else if (returnKey != null)
-    {   
-        returnKey.innerHTML = curLetter; 
-    }
-
-    floatkey.style.display = "none";
-    curLetter = "";
-    returnKey = null;
-    
-}
-
-function placeLetter(element)
-{
-	element.innerHTML = curLetter;
-	element.style.opacity = 1.0;
-	unhoverLetterspace(element);
-}
-
 function updateFloatKey(event)
 {
     floatkey.style.top = `${event.clientY+cursorOffset}px`;
@@ -109,7 +46,7 @@ function setup()
 		progress = null;
 	}
 	
-	console.log(progress);
+	console.log("Loaded progress: " + progress);
 	
 	let rando = mulberry32(seed);
 	
@@ -118,9 +55,9 @@ function setup()
 	
     for(let i = 0; i < keyboard.length; i++)
     {
-        keyboard[i].addEventListener("pointerdown", function(){buttonClicked(keyboard[i])});
-        keyboard[i].addEventListener("pointerenter", function(){hoverKey(keyboard[i])});
-        keyboard[i].addEventListener("pointerleave", function(){unhoverKey(keyboard[i])});
+        keyboard[i].addEventListener("pointerdown", buttonClicked);
+        keyboard[i].addEventListener("mouseenter", keyOver);
+        keyboard[i].addEventListener("mouseleave", keyOut);
 		
 		if(progress != null)
 		{
@@ -140,8 +77,9 @@ function setup()
 	var randomPosition = Math.floor(rando()*letterEntries.length);
     for(let i = 0; i < letterEntries.length; i++)
     {
-        letterEntries[i].addEventListener("pointerenter", function(){hoverLetterspace(letterEntries[i])});
-        letterEntries[i].addEventListener("pointerleave", function(){unhoverLetterspace(letterEntries[i])});
+        letterEntries[i].addEventListener("mouseenter", function(){hoverLetterspace(letterEntries[i])});
+        letterEntries[i].addEventListener("mouseleave", function(){unhoverLetterspace(letterEntries[i])});
+		letterEntries[i].addEventListener("pointerdown", touchLetterspace);
 		
 		if(progress != null)
 		{
@@ -168,13 +106,118 @@ function setup()
     }
 }
 
+function buttonClicked(event)
+{
+	let element = event.target;
+    if(element == null || element.innerHTML == "")
+    {
+        return;
+    }
+	
+
+	if(event.pointerType == "mouse")
+	{
+		handleButtonClicked(element);
+	}
+	else
+	{
+		handleButtonTouched(element);
+	}
+}
+
+function handleButtonClicked(button)
+{
+	if (curLetter == "")
+    {
+        curLetter = button.innerHTML;
+		returnKey = button;
+	
+		button.innerHTML = "";
+
+		floatkey.style.display = "flex";
+		floatkey.innerHTML = curLetter;
+
+		unhoverKey(button);
+    }
+}
+
+function handleButtonTouched(button)
+{
+	let unhighlight = button == returnKey;
+	if(curLetter != "")
+	{		
+		unhoverKey(returnKey);
+		curLetter = "";
+		returnKey = null;	
+	}
+	
+	if(unhighlight == false)
+	{
+		curLetter = button.innerHTML;
+		returnKey = button;
+		hoverKey(button);
+	}
+}
+
+function mouseReleased(event)
+{
+    if(curLetter == "")
+    {
+        return;
+    }
+	
+	if(event && event.pointerType == "touch")
+	{
+		return;
+	}
+
+    if(hoveredLetterspace != null)
+    {
+        hoveredLetterspace.innerHTML = curLetter;
+        hoveredLetterspace.style.opacity = 1.0;
+        unhoverLetterspace(hoveredLetterspace);
+		
+		localStorage.setItem(saveKey, getLetterGrid(false));
+		
+        if(animators <= 0)
+		{
+			checkScore();
+		}
+		
+		if(checkGameEnd())
+        {
+            scoreBoard();
+        }
+    }
+    else if (returnKey != null)
+    {   
+        returnKey.innerHTML = curLetter; 
+    }
+
+    floatkey.style.display = "none";
+    curLetter = "";
+    returnKey = null;
+    
+}
+
+function keyOver(event)
+{
+	let element = event.target;
+	if(element.innerHTML != "" && curLetter == "")
+    {
+		hoverKey(element);
+	}
+}
+
+function keyOut(event)
+{
+	unhoverKey(event.target);
+}
+
 function hoverKey(element)
 {
-    if(element.innerHTML != "" && curLetter == "")
-    {
-        element.style.background = "whitesmoke";
-        element.style.color = "var(--purple)";
-    }
+	element.style.background = "whitesmoke";
+	element.style.color = "var(--purple)";
 }
 
 function unhoverKey(element)
@@ -201,6 +244,28 @@ function unhoverLetterspace(element)
         element.style.opacity = "1.0";
     }
     hoveredLetterspace = null;
+}
+
+function touchLetterspace(event)
+{
+	if(event.pointerType == "mouse")
+	{
+		return;
+	}
+	
+	
+	if(curLetter != "" )
+	{
+		hoverLetterspace(event.target);
+		
+		if(hoveredLetterspace != null && returnKey != null)
+		{
+			returnKey.innerHTML = "";
+			unhoverKey(returnKey);
+		}
+		
+		mouseReleased(null);
+	}
 }
 
 function checkGameEnd()
@@ -300,6 +365,14 @@ function getSaveLetter(id)
 	return letter;
 }
 
+function getShareLetter(id)
+{
+	let letter = getLetter(id);
+	let diff = letter.charCodeAt(0) - "A".charCodeAt(0);
+	
+	return String.fromCodePoint(0xFF21 + diff);
+}
+
 function getElement(id)
 {
 	return document.getElementById(id);
@@ -309,7 +382,7 @@ function getLetterGrid(forShare)
 {
 	if(forShare)
 	{
-		return `${getLetter("tl")}|${getLetter("tm")}|${getLetter("tr")}\n${getLetter("ml")}|${getLetter("mm")}|${getLetter("mr")}\n${getLetter("bl")}|${getLetter("bm")}|${getLetter("br")}\n`;
+		return `${getShareLetter("tl")}|${getShareLetter("tm")}|${getShareLetter("tr")}\n${getShareLetter("ml")}|${getShareLetter("mm")}|${getShareLetter("mr")}\n${getShareLetter("bl")}|${getShareLetter("bm")}|${getShareLetter("br")}\n`;
 	}
 	
 	return `${getSaveLetter("tl")}${getSaveLetter("tm")}${getSaveLetter("tr")}${getSaveLetter("ml")}${getSaveLetter("mm")}${getSaveLetter("mr")}${getSaveLetter("bl")}${getSaveLetter("bm")}${getSaveLetter("br")}`;
