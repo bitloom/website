@@ -104,6 +104,9 @@ function setup()
 			animateLetter(letterEntries[i], 0);
 		}
     }
+	
+	setupGameSize();
+	window.addEventListener("resize", setupGameSize);
 }
 
 function buttonClicked(event)
@@ -168,7 +171,6 @@ function mouseReleased(event)
 	
 	if(event && event.pointerType == "touch")
 	{
-		console.log("got touch event!");
 		return;
 	}
 
@@ -448,10 +450,11 @@ function scoreBoard()
 			score += addScore
 			
         });
-    document.getElementById("score").style.display = "flex";
+    
     document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score}`;
-
-    document.getElementById("keyboard").style.display = "none";
+	let scoreDisplay = document.getElementById("score")
+	scoreDisplay.style.display = "flex";
+	scoreDisplay.style.animation = "0.33s ease-in anim-scoreAppear"
 	
 	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nhttps://www.bitloomgames.com/ncw`;
 }
@@ -481,6 +484,52 @@ function copyShareString()
 	{
 		requestAnimationFrame((t)=>animateNotifyIn(t));
 	}
+}
+
+const keySpacing = 0.125;
+const maxKeyboardHeight = 0.25;
+const maxGridWidth = 0.95;
+
+function setupGameSize()
+{
+	//let gameArea = document.getElementById("game").getBoundingClientRect();
+	let headerArea = document.getElementById("header").getBoundingClientRect();
+	let gameHeight = innerHeight - headerArea.height;
+	
+	let targetKeyWidth = innerWidth / 10.0;
+	
+	let targetHeight = Math.min(targetKeyWidth * 3, innerHeight*maxKeyboardHeight);
+	
+	let gridSize = Math.min(gameHeight - targetHeight, innerWidth * maxGridWidth);
+	
+	targetKeyWidth = Math.min(targetHeight / 3, targetKeyWidth);
+	
+	let keyboardWidth = targetKeyWidth * 9;
+	
+	let margin = targetKeyWidth*keySpacing;
+	targetKeyWidth -= margin * 2;
+	gridSize -= margin;
+	
+	let letterEntrySize = gridSize / 4;
+	
+	let root = document.querySelector(":root");
+	root.style.setProperty("--keypadding", margin.toString()+"px");
+	root.style.setProperty("--keysize", targetKeyWidth.toString()+"px");
+	root.style.setProperty("--lettersize", (letterEntrySize*0.5).toString()+"px");
+	
+	let gridArea = document.getElementById("wordgrid");
+	
+	gridArea.style.height = gridSize + "px";
+	gridArea.style.width = gridSize + "px";
+	gridArea.style.paddingLeft = (innerWidth*0.5 - gridSize*0.5) + "px";
+	
+	let scoreDisplay = document.getElementById("score");
+	scoreDisplay.style.left = (innerWidth*0.5 - keyboardWidth*0.5) + "px";
+	scoreDisplay.style.top = (document.getElementById("keyboard").getBoundingClientRect().y-margin) + "px";
+	
+	scoreDisplay.style.width = keyboardWidth + "px";
+	scoreDisplay.style.height = (targetHeight-margin) + "px";
+	
 }
 
 //Animation

@@ -9,6 +9,7 @@
   --purple: #7f4ea7;
   --keysize: 40px;
   --keypadding: 5px;
+  --lettersize: 3em;
 }
 
 html, body
@@ -29,7 +30,6 @@ html, body
 	flex-flow: column;
 	height:100%;
 	width:100%;
-	align-items:stretch;
 	align-content: center;
 }
 
@@ -48,13 +48,13 @@ hr
 h1
 {
 	font-size:5vmin;
-	margin-bottom: 2%;
-	margin-top: 2%;
+	margin-bottom: 2px;
+	margin-top: 1%;
 }
 
 p
 {
-	font-size: small;
+	font-size: large;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -82,15 +82,9 @@ a
 	color:white;
 }
 
-footer
-{
-	font-size:0.75em;
-}
-
 #game
 {
 	width: 100%;
-	max-width: 500px;
 	/* vertical align in screen*/
 	flex: 1 1 auto;
 	align-content: center;
@@ -104,7 +98,7 @@ footer
 	grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
 	grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
 	gap: 10px 10px;
-	width:100%;
+	justify-self: center;
 }
 
 .letterspace
@@ -120,7 +114,7 @@ footer
 	justify-content: center;
 	align-items: center;
 	align-self: center;
-	font-size: 3em;
+	font-size: var(--lettersize);
 	user-select:none;
 }
 
@@ -128,7 +122,6 @@ footer
 #keyboard
 {  
 	width:100%;
-	max-width: 700px;
 	margin-top: var(--keypadding);
 }
 
@@ -154,8 +147,12 @@ footer
 	background: none;
 	color:whitesmoke;
 	user-select: none;
-	margin-right: 2.5px;
-	margin-left: 2.5px;
+	
+	aspect-ratio:1;
+	margin-right: calc(var(--keypadding)*0.5);
+	margin-left: calc(var(--kepadding)*0.5);
+	
+	font-size: calc(var(--keysize)*0.5);
 }
 
 #floatkey
@@ -171,6 +168,8 @@ footer
 	align-items: center;
 
 	display:none;
+	
+	font-size: calc(var(--keysize)*0.5);
 }
 
 /*score spaces*/
@@ -189,22 +188,20 @@ footer
 #score
 {
   display: none;
-  min-height: calc((var(--keysize) + var(--keypadding)) * 3);
+  position: absolute;
   
   background: whitesmoke;
-  border-radius: 5vh;
+  border-radius: 30px;
   color: var(--purple);
 
+  flex-flow:column;
   justify-content: center;
   align-items: center;
-
-  margin-top: 15px;
-
-  width:100%;
+  
+  font-size:4vmin;
   
   user-select: none;
   
-  flex-flow:column;
 }
 
 #notification
@@ -228,6 +225,13 @@ footer
 	100%{opacity:1.0; margin:0px;}
 }
 
+@keyframes anim-scoreAppear
+{
+	0%	{transform:scale(1.0,0.0);}
+	80% {transform:scale(1.0,1.1);}
+	100%{transform:scale(1.0,1.0);}
+}
+
 @keyframes anim-scoreBad
 {
 	0%	{transform:rotate(0);opacity:0;}
@@ -237,18 +241,12 @@ footer
 	90%{transform:rotate(0deg);opacity:1;}
 }
 
-/*@keyframes anim-scoreBad
-{
-	0%	{font-size:1em; opacity:0;}
-	50%	{font-size:0.5em; opacity:1;}
-	100%{font-size:1em;}
-}*/
 
 @keyframes anim-scoreGood
 {
-	0%	{font-size:1em; opacity:0;}
+	0%	{font-size:calc(var(--lettersize)*0.25); opacity:0;}
 	50%	{opacity:1;}
-	100%{font-size:2em;}
+	100%{font-size:calc(var(--lettersize)*0.5);}
 }
 
 .scoreGood
