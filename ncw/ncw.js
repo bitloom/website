@@ -439,9 +439,9 @@ function checkScore()
 
 function scoreBoard()
 {
-    var words = getWords();
+    let words = getWords();
 
-    var score = 0;
+    let score = 0;
 
     Object.keys(words).forEach(key => 
         {
@@ -450,8 +450,12 @@ function scoreBoard()
 			score += addScore
 			
         });
-    
-    document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score}`;
+	
+	localStorage.setItem(saveKey, getLetterGrid(false)+`:${score}`);
+	
+	let stats = getStats();
+	
+    document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score} <br> Streak: ${stats.streak}\tAvg Score: ${stats.average}`;
 	let scoreDisplay = document.getElementById("score")
 	scoreDisplay.style.display = "flex";
 	scoreDisplay.style.animation = "0.33s ease-in anim-scoreAppear"
@@ -484,6 +488,78 @@ function copyShareString()
 	{
 		requestAnimationFrame((t)=>animateNotifyIn(t));
 	}
+}
+
+function getStats()
+{
+	let average = 0;
+	let streak = 1;
+	let validCount = 0;
+	
+	let entries = Object.keys(localStorage)
+	for(let i = 0; i < entries.length; i++)
+	{
+		let progress = localStorage.getItem(entries[i]);
+		let score = getPreviousScore(progress)
+		if(score >= 0)
+		{
+			average += score;
+			validCount++;
+			
+			if(i > 0)
+			{
+				streak = areDatesConsecutive(entries[i], entries[i-1]) ? streak + 1 : 1;
+			}
+		}
+		else
+		{
+			streak = 1;
+		}
+	}
+	
+	if(validCount > 0)
+	{
+		average /= validCount;
+	}
+	else
+	{
+		average = "--";
+	}
+		
+	
+	return {"streak":streak, "average":average};
+}
+
+function getPreviousScore(progress)
+{
+	if(progress.includes("_") || progress == "")
+	{
+		return -1;
+	}
+	
+	let split = progress.split(":")
+	if(split.length > 1)
+	{
+		return parseInt(split[1]);
+	}
+	return -1;
+}
+
+function areDatesConsecutive(date1, date2)
+{
+	if(date1.length < 8 || date2.length < 8)
+	{
+		return false;
+	}
+	const dateString1 = date1.substring(4) + "/" + date1.substring(2,4) + "/" + date1.substring(0,2)
+	const dateString2 = date2.substring(4) + "/" + date2.substring(2,4) + "/" + date2.substring(0,2)
+	
+	const diffTime = Math.abs((new Date(dateString2)) - (new Date(dateString1)));
+	const diffDay = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+	
+	//console.log(`Dates ${dateString1} / ${dateString2} are ${diffDay} day(s) apart`)
+
+	return diffDay == 1;
 }
 
 const keySpacing = 0.125;
