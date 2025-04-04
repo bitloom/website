@@ -1,8 +1,9 @@
 const floatkey = document.getElementById("floatkey");
+const modal = document.getElementById("howToModal");
+const modalContent = document.getElementById("howToContent");
 
 const letterEntries = document.getElementsByClassName("letterspace");
 const keyboard = document.getElementsByClassName("key");
-
 const cursorOffset = 10;
 
 var curLetter = "";
@@ -13,6 +14,8 @@ var hoveredLetterspace = null;
 var shareString = "";
 
 var saveKey;
+
+const newGameKey = "NEWGAME";
 
 function updateFloatKey(event)
 {
@@ -35,7 +38,10 @@ function setup()
 {	
     document.addEventListener("pointerup", mouseReleased);
     document.addEventListener("pointermove", updateFloatKey);
-
+	
+	let isNewGame = localStorage.getItem(newGameKey) == null;
+	localStorage.setItem(newGameKey, newGameKey);
+	
 	var date = new Date();
 	var seed = date.getDate()*1000000 + date.getMonth() * 10000 + date.getFullYear();
 	saveKey = seed;
@@ -107,6 +113,22 @@ function setup()
 	
 	setupGameSize();
 	window.addEventListener("resize", setupGameSize);
+	
+	window.onclick = function(event)
+	{
+		if(event.target == modal)
+		{
+			closeModal();
+		}
+	}
+	
+	document.getElementById("closeModal").onclick = closeModal;
+	document.getElementById("howToButton").onclick = showModal;
+	
+	if(isNewGame)
+	{
+		showModal();
+	}
 }
 
 function buttonClicked(event)
@@ -276,6 +298,26 @@ function touchLetterspace(event)
 	}
 }
 
+const modalAnimateTime = 0.5;
+function closeModal()
+{
+	modal.style.animation = `${modalAnimateTime}s ease-in-out both anim-modal-bgOut`;
+	modalContent.style.animation = `${modalAnimateTime}s ease-in-out both anim-modal-contentOut`;
+	setTimeout(hideModal, modalAnimateTime*1000);
+}
+
+function hideModal()
+{
+	modal.style.display = "none";
+}
+
+function showModal()
+{
+	modal.style.display = "flex";
+	modal.style.animation = `${modalAnimateTime}s ease-in-out both anim-modal-bgIn`;
+	modalContent.style.animation = `${modalAnimateTime}s ease-in-out both anim-modal-contentIn`;
+}
+
 function checkGameEnd()
 {
     for(let i = 0; i < letterEntries.length; i++)
@@ -421,10 +463,10 @@ function checkScore()
 			scoreElement.classList.add(addScore > 0 ? "scoreGood" : "scoreBad");
 			scoreElement.style.animationDelay = `${delay*letterPopDelay}s`
 			
-			if(addScore <= 0)
+			/*if(addScore <= 0)
 			{
 				scoreElement.addEventListener("animationend", scoreAnimationFinished);
-			}
+			}*/
 			
 			delay++;
 			
@@ -455,28 +497,17 @@ function scoreBoard()
 	
 	let stats = getStats();
 	
-    document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score} <br> Streak: ${stats.streak}\tAvg Score: ${stats.average}`;
+    document.getElementById("scoreText").innerHTML = `Game Over! <br> You scored: ${score} <br> Streak: ${stats.streak}\tAvg Score: ${stats.average.toFixed(2)}`;
 	let scoreDisplay = document.getElementById("score")
 	scoreDisplay.style.display = "flex";
 	scoreDisplay.style.animation = "0.33s ease-in anim-scoreAppear"
 	
-	shareString = `I scored ${score} points in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nhttps://www.bitloomgames.com/ncw`;
+	shareString = `I made ${score} words in Noughts and Crosswords!\n\n${getLetterGrid(true)}\nhttps://www.bitloomgames.com/ncw`;
 }
 
 function checkWord(word)
 {
-    word = word.toUpperCase();
-    var score = 0;
-    if(dict.includes(word))
-    {
-        score += 1;
-        if(word.includes("X"))
-        {
-            score += 1;
-        }
-    }
-	
-    return score;
+    return dict.includes(word.toUpperCase()) ? 1 : 0;
 }
 
 function copyShareString()
@@ -495,25 +526,23 @@ function getStats()
 	let average = 0;
 	let streak = 1;
 	let validCount = 0;
+	let dates = []
 	
 	let entries = Object.keys(localStorage)
 	for(let i = 0; i < entries.length; i++)
 	{
+		if(entries[i] == newGameKey)
+		{
+			continue;
+		}
+		
 		let progress = localStorage.getItem(entries[i]);
 		let score = getPreviousScore(progress)
 		if(score >= 0)
 		{
 			average += score;
 			validCount++;
-			
-			if(i > 0)
-			{
-				streak = areDatesConsecutive(entries[i], entries[i-1]) ? streak + 1 : 1;
-			}
-		}
-		else
-		{
-			streak = 1;
+			dates.push(getSysDate(entries[i]));
 		}
 	}
 	
@@ -526,6 +555,8 @@ function getStats()
 		average = "--";
 	}
 		
+		
+	streak = getStreak(dates);
 	
 	return {"streak":streak, "average":average};
 }
@@ -545,21 +576,50 @@ function getPreviousScore(progress)
 	return -1;
 }
 
+function getStreak(dates)
+{
+	if(dates.length <= 1)
+	{
+		return dates.length;
+	}
+	
+	//sort dates descending
+	dates.sort(function(a,b){return b.getTime() - a.getTime();});
+	let streak = 1;
+	for(let i = 1; i < dates.length; i++)
+	{
+		if(areDatesConsecutive(dates[i-1], dates[i]))
+		{
+			streak += 1;
+		}
+		else
+		{
+			return streak;
+		}
+	}
+	return streak;
+}
+
+function getSysDate(dateString)
+{
+	if(dateString.length == 7)
+	{
+		dateString = "0" + dateString;
+	}
+	let month = (parseInt(dateString.substring(2,4))) + 1;
+	const sysString = dateString.substring(4) + "-" + month + "-" + dateString.substring(0,2);
+	//console.log(`Converting input ${dateString} to ${sysString}: ${new Date(sysString).toString()}`);
+	return new Date(sysString);
+}
+
 function areDatesConsecutive(date1, date2)
 {
-	if(date1.length < 8 || date2.length < 8)
-	{
-		return false;
-	}
-	const dateString1 = date1.substring(4) + "/" + date1.substring(2,4) + "/" + date1.substring(0,2)
-	const dateString2 = date2.substring(4) + "/" + date2.substring(2,4) + "/" + date2.substring(0,2)
-	
-	const diffTime = Math.abs((new Date(dateString2)) - (new Date(dateString1)));
+	const diffTime = Math.abs(date2.getTime() - date1.getTime());
 	const diffDay = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 	
-	//console.log(`Dates ${dateString1} / ${dateString2} are ${diffDay} day(s) apart`)
+	//console.log(`Dates ${date1.toString()} / ${date2.toString()} are ${diffDay} day(s) apart`)
 
-	return diffDay == 1;
+	return diffDay <= 1;
 }
 
 const keySpacing = 0.125;
@@ -568,7 +628,6 @@ const maxGridWidth = 0.95;
 
 function setupGameSize()
 {
-	//let gameArea = document.getElementById("game").getBoundingClientRect();
 	let headerArea = document.getElementById("header").getBoundingClientRect();
 	let gameHeight = innerHeight - headerArea.height;
 	
@@ -606,6 +665,17 @@ function setupGameSize()
 	scoreDisplay.style.width = keyboardWidth + "px";
 	scoreDisplay.style.height = (targetHeight-margin) + "px";
 	
+	let howToContent = document.getElementById("howToContent");
+	howToContent.style.width = innerWidth*0.9  + "px";
+	let howToHeight = gridSize + targetHeight;
+	howToContent.style.height = howToHeight + "px";
+	howToContent.style.left = innerWidth*0.05 + "px";//(innerWidth*0.5 - gridSize*0.5) + "px";
+	howToContent.style.top = (innerHeight - howToHeight)*0.5 + "px";
+	
+	let howToButton = document.getElementById("howToButton");
+	const buttonPadding = 8;
+	howToButton.style.top = buttonPadding + "px";
+	howToButton.style.left = (window.innerWidth - targetKeyWidth*0.65 - buttonPadding*2) + "px";
 }
 
 //Animation
@@ -721,14 +791,6 @@ function animateWord(letterIds)
 	for(let i=0; i < letterIds.length; i++)
 	{
 		animateLetter(document.getElementById(letterIds[i]), letterPopDelay*i);
-	}
-}
-
-function scoreAnimationFinished(event)
-{
-	if(this.innerHTML == "X")
-	{
-		this.innerHTML = "0";
 	}
 }
 
