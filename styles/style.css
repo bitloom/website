@@ -1,221 +1,369 @@
 @font-face
 {
-  font-family: "rounded";
-  src: url(../fonts/rounded.ttf) format("truetype");
+  font-family: "phont";
+  src: url(../fonts/phontOG20.ttf) format("truetype");
+}
+
+@keyframes WarpIn
+{
+  0%    {width: 0%; opacity: 0}
+  50%   {width: 100%; opacity: 100%}
+  75%   {width: 90%;}
+  100%  {width: 100%;}
+}
+
+@keyframes LogoWarp
+{
+  0%    {rotate: -45deg; opacity: 0}
+  50%   {rotate: 15deg; }
+  100%  {rotate:0; opacity: 100%;}
+}
+
+@keyframes TaglinePopIn 
+{
+  0%    {opacity: 0;}
+  100%  {opacity: 100%; }
+}
+
+@keyframes SelectItem
+{
+  0%    {border-radius: 0; }
+  100%  {border-radius: 25px; }
+}
+
+@keyframes ButtonRotate
+{
+  0%    {rotate: 0deg;}
+  25%   {rotate: 5deg;}
+  50%   {rotate: 0deg;}
+  75%   {rotate: -5deg;}
+  100%  {rotate: 0deg;}
+}
+
+@keyframes LogoTextWarpIn
+{
+  0%  {opacity: 0;}
+  90% {opacity: 100%;}
+}
+
+:root
+{
+  --purple: #7f4ea7;
 }
 
 html, body
 {
-  background-color: #585bac;
+  background-color: var(--purple);
   font-weight: lighter;
-  font-family: rounded;
+  font-family: phont;
   color: #ffffff;
   width: 100%;
-  height: auto;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-  overflow: auto;
-  overflow-x: hidden;
+  height:auto;
+  margin: 0;
+  text-align: center;
+}
+
+body
+{
+  min-height: 100%;
 }
 
 a
 {
   text-decoration: underline;
-  color: white;
   font-size: 1.25em;
-  cursor: caret;
+  cursor: pointer;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
 
 a:hover
 {
-  color: pink;1
+  color: rgb(211, 74, 165);
 }
 
-#banner
+a.selected
 {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+  background-image: linear-gradient(#7f4ea7,#602e88);
+  color: whitesmoke;
+  border-radius: inherit;
+
+  animation: SelectItem 0.25s both
 }
 
-.bodyLink
+a.social
 {
-  color: orange;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
-.bodyLink:hover
+.linkButton
 {
-  color: pink;
-}
-
-.bannerImage
-{
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#overview
-{
-  position: relative;
-  top: -5vw;
-  color: #5F60AB;
-  background-color: #FFFFFF;
-  text-align: center;
-  margin-bottom: 5vw;
+  color:whitesmoke;
+  padding-left: 1vh;
+  padding-right: 1vh;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 0;
-  padding-right: 0;
-  width: 90%;
-  max-width: 800px;
-  border-radius: 10px;
-  border-color: #FFFFFF;
-  border-style: solid;
+  margin-bottom: 3vh;
 }
 
-.overviewVideo
+a.button
 {
-  position: relative;
-  padding-bottom: 56.25%;
-  width: 90%;
-  margin: auto;
-  height: 0;
+  color:whitesmoke;
+  background-image: linear-gradient(#7f4ea7,#602e88);
+  border-radius: 25px;
+  padding-left: 3vh;
+  padding-right: 3vh;
 }
 
-.overviewVideo iframe
+a.button:hover
 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background-image: linear-gradient(#a773d1,#602e88);
 }
 
-.overviewGallery
+.contentContainer
 {
-  width: 90%;
-  margin: auto;
-}
-
-.overviewImage
-{
-  width: 49.5%;
-  margin: 0;
-  padding: 0;
-}
-
-.fullscreenImage
-{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #000000aa;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  z-index: 1000;
-}
-
-.fullscreenImageChild
-{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 90%;
-  height: auto;
-  max-height: 100%;
-  z-index: 1001;
-  transform: translate(-50%, -50%);
-}
-
-.overviewCaption
-{
-  padding-top: 3vw;
-  padding-bottom: 3vw;
-  font-size: 2.75vw;
-  font-weight: bold;
-  width: 90%;
+  width: 75%;
+  max-width: 750px;
+  margin-left : auto;
+  margin-right : auto;
+  padding-top:5px;
+  margin-top:5px;
   text-align: center;
-  margin: auto;
+  height: min-content;
+  margin-bottom: 20px;
 }
 
-.overviewText
+.contentBox, .contentBoxDelay
 {
-  padding-top: 3vw;
-  padding-bottom: 3vw;
-  font-size: 2.75vw;
-  width: 90%;
-  text-align: justify;
-  text-align-last: center;
-  margin: auto;
-}
-
-.footer
-{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding-top: 1vmin;
-  padding-bottom: 1vmin;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  height: 4vmin;
-  background-color: #5DBCFF;
-}
-
-#footerContents
-{
-  width: 100%;
+  background-color: whitesmoke;
+  color: #7f4ea7;
+  border-radius: 25px;
+  width: auto;
+  margin-left : auto;
+  margin-right : auto;
+  transform-origin: center;
   max-width: 100%;
+
+  animation-name: WarpIn;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+}
+
+.hidden
+{
+  visibility:collapse;
+  padding: 0;
+  height: 0;
+  position:absolute;
+  display:none;
+}
+
+.contentBoxDelay
+{
+  animation-delay: 0.25s;
+  padding-top: inherit;
+  padding-bottom: inherit;
+  height: inherit;
+}
+
+#logo
+{
+  padding-top: 1%;
+  padding-bottom: 0.5%;
+  display: block;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
-  font-size: 2vw;
-}
-
-.tab
-{
-  padding: 1em;
-}
-
-.timeline
-{
-  overflow: scrolling;
+  width: 150px;
   height: auto;
-  overflow: scroll;
-  overflow-x: hidden;
-  overflow-scrolling: touch;
-  -webkit-overflow-scrolling: touch;
-  height: 80%;
+  animation: LogoWarp 1s both;
 }
 
-#littleMan
+#logoText
 {
-  margin: auto;
-  width: 40%;
-  position: relative;
-  bottom: 0;
+  display:block;
+  height: 75px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  animation: LogoTextWarpIn 2s both;
 }
 
-@media screen and (min-width: 800px) {
-  .overviewCaption
-  {
-     font-size: 25px;
-  }
+/*for game logos inline*/
+.logoImage
+{
+  max-width: 50%;
+  width: 200px;
+  height: auto;
+}
+/*
+#teamPhoto
+{
+  max-width: 100%;
+  width: 550px;
+  border-radius: 20px;
+}*/
 
-  .overviewText
-  {
-    font-size: 25px;
-  }
+#tagline
+{
+  color: whitesmoke;
+  padding : 5px;
+  margin: 5px;
+  text-align: center;
+  font-size: 1.5em;
+}
 
-  #footerContents
+#navigation
+{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+}
+
+.aboutText
+{
+  width:500px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer
+{
+  margin-left:auto;
+  margin-right: auto;
+  height: min-content;
+  opacity: 100%;
+}
+
+#footerText
+{
+  opacity: 0;
+}
+
+#footerImage:hover + #footerText
+{
+  opacity: 50%;
+}
+
+.gameEntry
+{
+  width:90%;
+  padding-top:1vh;
+  padding-bottom:1vh;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  height:min-content;
+}
+
+h3
+{
+  margin-bottom: 0px;
+}
+
+.screenshot
+{
+  max-width:100%;
+  width:480px;
+  height:270px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:auto;
+  margin-bottom:auto;
+  border-radius: 10px;
+  position: absolute;
+  margin-left: auto;
+  margin-right:auto;
+  left:calc(50% - 240px);
+}
+
+@media screen and (max-width: 480px) 
+{
+  .screenshot
   {
-    font-size: 20px;
+    width: 99%;
+	height: auto;
+	left: 0px;
+  }  
+  
+  .slideshow
+  {
+	height:min-content;
   }
+}
+
+.slideshow
+{
+	align-content: normal;
+	padding-top:10px;
+	width:100%;
+	height:280px;
+}
+
+.fadeInScreenshot
+{
+  animation: TaglinePopIn 1s forwards;
+}
+
+.fadeOutScreenshot
+{
+  animation: TaglinePopIn 1s reverse;
+}
+
+.gameDescription
+{
+  width:95%;
+  height:100%;
+  vertical-align: middle;
+  text-align: center;
+  margin:auto;  
+}
+
+#tag1
+{
+  animation: TaglinePopIn 1s both 0.5s;
+}
+
+#tag2
+{
+  animation: TaglinePopIn 1s both 0.75s;
+}
+
+#tag3
+{
+  animation: TaglinePopIn 1s both 1s;
+}
+
+#tag4
+{
+  animation: TaglinePopIn 1s both 1.25s;
+}
+
+#tag5
+{
+  animation: TaglinePopIn 1s both 1.5s;
+}
+
+#tag6
+{
+  animation: TaglinePopIn 1s both 1.75s;
+}
+
+hr
+{
+  opacity: 25%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media screen and (max-width: 600px) 
+{
+  .contentContainer
+  {
+    width: 99%;
+  }  
 }
