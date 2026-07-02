@@ -1,114 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF8">
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="icon" type="image/x-icon" href="images/Logo-Icon.ico">
-  <title>Bit Loom</title>
-</head>
-<body>
-  <img src="images/logo.webp" id="logo" alt="The Bit Loom Logo">
-  <img src="images/logo_text_light.webp" id="logoText" alt="The words 'Bit Loom'">
-  <div id="tagline">
-    <span id="tag1">Making</span> 
-    <span id="tag2">Games</span> 
-    <span id="tag3">To</span> 
-    <span id="tag4">Surprise</span> 
-    <span id="tag5">and</span> 
-    <span id="tag6">Delight</span>
-  </div>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="contentContainer">
-    <div id="navigation" class="contentBox">
-      <a onclick="swapContent('home', this)" class="selected">Home</a>
-      <a onclick="swapContent('contact', this)">Find Us</a>
-    </div>
-  </div>
-  
-  <div class="contentContainer" id="displayContent">
-    <div id="home" class="contentBoxDelay">
-      <h2>Hi There! We're Bit Loom!</h2>
-      <p class="aboutText">We decided we wanted to make games together back in 2017 and have somehow managed to keep it up until now.</p>
-      <p class="aboutText">Based in "Sunny" Dundee up in Scotland, Doug, Henry, James and Caitlin love to come up with weird ideas to try and make the world a little brighter.</p>
-      <p class="aboutText">We have released 2 games and are currently working on a new project which we'll be talking about more soon! 👀</p>
-      
-<!--GAMES-->
+        <title>Glenmara: Still Life Artist</title>
 
-      <h2>Our games</h2>
+        <style>
+            @font-face {
+              font-family: fredoka; 
+              src: url(glenmara/fredoka.ttf);
+            }
 
+            body {
+                font-family: fredoka;
+                font-size: 3vh;
+                color: #FFF !important;
+                background-color: #A22D54 !important;
+                background: none !important;
+                text-shadow: 0px 0px 8px black;
+                text-align: center;
+                line-height: 4vh;
+            }
 
-      <!--Tray Racers-->
-      <img src="images/trlogo.webp" class="logoImage" alt="The Tray Racers Logo">
-      <div class="gameEntry">
-        <div class="slideshow">
-          <img src="images/TrayRacers/tr6.jpg" class="screenshot">
-          <img src="images/TrayRacers/tr2.jpg" class="screenshot">
-          <img src="images/TrayRacers/tr3.jpg" class="screenshot">
-          <img src="images/TrayRacers/tr4.jpg" class="screenshot">
-		  <img src="images/TrayRacers/tr1.jpg" class="screenshot">
-          <img src="images/TrayRacers/tr5.jpg" class="screenshot">
-          <img src="images/TrayRacers/tr7.jpg" class="screenshot">
-          
-        </div>
+            html {
+                background: url("glenmara/background.png") no-repeat center center fixed;
+            }
+
+            a {
+                color: #FFF !important;
+                font-size: 4vh; 
+                line-height: 6vh;
+                text-decoration: none;
+                transition: 0.3s;
+            }
+
+            a:hover {
+                text-shadow: 0px 0px 3px white;
+            }
+
+            a img {
+                height: 8vh;
+                transform: scale(1.0); 
+                transition: 0.3s;
+            }
+
+            a img:hover {
+                transform: scale(1.1); 
+            }
+        </style>
+    </head>
+
+    <body>
         <div>
-          <p class="gameDescription">An Adorable Post-Apocalyptic Multiplayer Racer!<br>
-            The world ended…But the fun didn’t! Race solo, or with your pals across the adorable post-apocalyptic world of Tray Racers! 
-            Grab a tray, surf the dunes, and get ready to SLIDE, DRIFT and TRICK your way to the finish line in this cute and colorful party racer, built for online multiplayer!
-          </p>
-        </div>  
-      </div>
-      <br>
-      <div class="linkButton"><a class="button" href="http://trayracers.com">Out Now!</a></div>
-      
-      <hr>
-      <br>
+            <div>
+                <img src="glenmara/logo.png" style="height: 38vh;">
+            </div>
 
-      <img src="images/phogslogo.webp" class="logoImage" alt="The PHOGS Logo">
-      <!--PHOGS!-->
-      <div class="gameEntry">
-        <div class="gameElement slideshow">
-          <img src="images/PHOGS/phogs1.jpg" class="screenshot fadeInScreenshot">
-          <img src="images/PHOGS/phogs2.jpg" class="screenshot">
-          <img src="images/PHOGS/phogs3.jpg" class="screenshot">
-          <img src="images/PHOGS/phogs7.jpg" class="screenshot">
-          <img src="images/PHOGS/phogs5.jpg" class="screenshot">
-          <img src="images/PHOGS/phogs4.jpg" class="screenshot">
-          <img src="images/PHOGS/phogs6.jpg" class="screenshot">
+            <div>
+                <span>
+                    Get creative as a still life artist<br>
+                    as you settle into your new home<br>
+                    on the wee Scottish isle of Glenmara<br>
+                </span>
+            </div>
+
+            <div style="margin-top: 6vh;">
+                <a href="https://store.steampowered.com/app/4022800/">
+                    wishlist on steam
+                </a>
+            </div>
+
+            <div>
+                <a href="https://drive.google.com/drive/folders/1NB-6AOzflcI-gVRBEZrBLO_Qq67unywq?usp=drive_link">
+                    view presskit
+                </a>
+            </div>
+
+            <div style="margin-top: 6vh;">
+                <a href="https://bsky.app/profile/bitloomgames.bsky.social" title="Bluesky">
+                    <img src="glenmara/bluesky.png"></img>
+                </a>
+
+                <a href="https://www.instagram.com/bitloomgames/" title="Instagram">
+                    <img src="glenmara/instagram.png"></img>
+                </a>
+            </div>
+
+            <div>
+                <a href="https://bitloomgames.com/" title="Bit Loom">
+                    <img src="glenmara/bitloom-long.png"></img>
+                </a>
+            </div>
         </div>
-        <div>
-          <p class="gameDescription">
-            A cooperative double-ended dog puzzler.<br>
-            In PHOGS! you play as a duo of dogs on a captivating, puzzle-filled adventure. 
-            Linked by a stretchy belly, you’ll need to bark, bite and bounce your way through obstacles set across the themed worlds of Food, Sleep and Play, 
-            in co-op or single-player.
-          </p>
-        </div>  
-      </div>
-      <br>
-      <div class="linkButton"><a class="button" href="https://playphogs.com">Out Now!</a></div>
-      <br>
-    </div>
-  </div>
-
-  <div class="hidden" id="hiddenContent">
-    <!--CONTACT-->
-    <div id="contact" class="contentBoxDelay">
-      <h2>Come and say hi!</h2>
-      <p class="aboutText">You can reach out to us by email:</p>
-      <p class="aboutText"><a href="mailto:info@bitloomgames.com">info@bitloomgames.com</a></p>
-      <br>
-      <p class="aboutText">Follow our socials for updates on future projects!</p>
-      <p class="aboutText">instagram: <a href="https://www.instagram.com/bitloomgames/" class="social">bitloomgames</a></p>
-      <p class="aboutText">tiktok: <a href="https://www.tiktok.com/@bitloomgames" class="social">@bitloomgames</a></p>
-      <p class="aboutText">bsky: <a href="https://bsky.app/profile/bitloomgames.bsky.social" class="social">@bitloomgames.bsky.social</a></p>
-      <br>
-    </div>
-  </div>
-  <a href="https://cityofdesigndundee.com/design-lives-here/"><img src="images/design-lives-here.png" width="200px" height="auto" id="footerImage"></img></a>
-  <br><br>
-  <footer><img src="images/little-man.png" width="40px" height="auto" id="footerImage"></img><p id="footerText">© Bit Loom Ltd. 2024</p></footer>
-
-  <script src="scripts/script.js"></script>
-
-</body>
+    </body>
 </html>
