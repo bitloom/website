@@ -24,10 +24,6 @@
                 line-height: 4vh;
             }
 
-            html {
-                background: url("glenmara/background.png") no-repeat center center fixed;
-            }
-
             a {
                 color: #FFF !important;
                 font-size: 4vh; 
@@ -49,10 +45,51 @@
             a img:hover {
                 transform: scale(1.1); 
             }
+
+            #background {
+                background-image: url("glenmara/styles/photo.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center;
+                background-size: cover;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: -0;
+                z-index: -1;
+            }
+
+            #paint { 
+                right: 6vh; 
+                bottom: 6vh; 
+                width: 8vh; 
+                height: 8vh;
+                position: absolute;
+                border: none;
+                cursor: pointer;
+                background-image: url("glenmara/paint-icon.png");
+                background-size: cover;
+                background-color: #00000000;
+                transform: scale(1.0); 
+                transition: 0.1s;
+            }
+
+            #paint:hover {
+                transform: scale(1.1); 
+                background-color: #00000000;
+            }
+
+            #paint:active {
+                transform: scale(0.95); 
+                background-color: #00000000;
+            }
         </style>
     </head>
 
     <body>
+        <img id="background"></img>
+
         <div>
             <div>
                 <img src="glenmara/logo.png" style="height: 38vh;">
@@ -94,5 +131,26 @@
                 </a>
             </div>
         </div>
+
+        <button id="paint"></button>
     </body>
+
+    <script>
+        var styleIndex = 0;
+        var styleImages = ["oils", "watercolour", "expressionist", "chalky", "charcoal", "pencil", "mosaic", "lino", "pop", "pixel", "photo"]
+
+        var paint = document.getElementById("paint");
+        var background = document.getElementById("background");
+
+        paint.addEventListener("click", e => {
+            styleIndex += 1;
+
+            if (styleIndex >= styleImages.length)
+            {
+                styleIndex = 0;
+            } 
+
+            background.style.backgroundImage = "url('glenmara/styles/" + styleImages[styleIndex] + ".png')";
+        });
+    </script>
 </html>
