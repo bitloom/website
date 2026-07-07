@@ -4,153 +4,58 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+		<link rel="stylesheet" type="text/css" href="glenmara/style.css">
+		
         <title>Glenmara: Still Life Artist</title>
-
-        <style>
-            @font-face {
-              font-family: fredoka; 
-              src: url(glenmara/fredoka.ttf);
-            }
-
-            body {
-                font-family: fredoka;
-                font-size: 3vh;
-                color: #FFF !important;
-                background-color: #A22D54 !important;
-                background: none !important;
-                text-shadow: 0px 0px 8px black;
-                text-align: center;
-                line-height: 4vh;
-            }
-
-            a {
-                color: #FFF !important;
-                font-size: 4vh; 
-                line-height: 6vh;
-                text-decoration: none;
-                transition: 0.3s;
-            }
-
-            a:hover {
-                text-shadow: 0px 0px 3px white;
-            }
-
-            a img {
-                height: 8vh;
-                transform: scale(1.0); 
-                transition: 0.3s;
-            }
-
-            a img:hover {
-                transform: scale(1.1); 
-            }
-
-            #background {
-                background-image: url("glenmara/styles/photo.png");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-position: center;
-                background-size: cover;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                left: 0;
-                top: -0;
-                z-index: -1;
-            }
-
-            #paint { 
-                right: 6vh; 
-                bottom: 6vh; 
-                width: 8vh; 
-                height: 8vh;
-                position: absolute;
-                border: none;
-                cursor: pointer;
-                background-image: url("glenmara/paint-icon.png");
-                background-size: cover;
-                background-color: #00000000;
-                transform: scale(1.0); 
-                transition: 0.1s;
-            }
-
-            #paint:hover {
-                transform: scale(1.1); 
-                background-color: #00000000;
-            }
-
-            #paint:active {
-                transform: scale(0.95); 
-                background-color: #00000000;
-            }
-        </style>
     </head>
 
     <body>
-        <img id="background"></img>
+		<img class="background"></img>
+        <img class="background"></img>
 
         <div>
             <div>
-                <img src="glenmara/logo.png" style="height: 38vh;">
+                <img src="glenmara/logo.png" style="width:64vh; height: auto; max-width:98%;">
             </div>
 
-            <div>
-                <span>
-                    Get creative as a still life artist<br>
-                    as you settle into your new home<br>
-                    on the wee Scottish isle of Glenmara<br>
-                </span>
-            </div>
+			<div style="max-width:48vh; margin:auto; margin-top:-5vh;">
+				Get creative as a still life artist
+				as you settle into your new home
+				on the wee Scottish isle of Glenmara
+			</div>
 
-            <div style="margin-top: 6vh;">
-                <a href="https://store.steampowered.com/app/4022800/">
-                    wishlist on steam
-                </a>
-            </div>
+			<button id="paint"></button>
+			<div style="position: absolute; bottom: 2vh; width:100%; margin-left:auto; margin-right:auto;">
+				<div>
+					<a href="https://store.steampowered.com/app/4022800/">
+						wishlist on steam
+					</a>
+				</div>
 
-            <div>
-                <a href="https://drive.google.com/drive/folders/1NB-6AOzflcI-gVRBEZrBLO_Qq67unywq?usp=drive_link">
-                    view presskit
-                </a>
-            </div>
+				<div>
+					<a href="https://drive.google.com/drive/folders/1NB-6AOzflcI-gVRBEZrBLO_Qq67unywq?usp=drive_link">
+						view presskit
+					</a>
+				</div>
 
-            <div style="margin-top: 6vh;">
-                <a href="https://bsky.app/profile/bitloomgames.bsky.social" title="Bluesky">
-                    <img src="glenmara/bluesky.png"></img>
-                </a>
-
-                <a href="https://www.instagram.com/bitloomgames/" title="Instagram">
-                    <img src="glenmara/instagram.png"></img>
-                </a>
-            </div>
-
-            <div>
-                <a href="about.html" title="Bit Loom">
-                    <img src="glenmara/bitloom-long.png"></img>
-                </a>
-            </div>
+				
+				<a href="about.html" title="Bit Loom" style="filter: drop-shadow(0px 0px 5px rgb(0 0 0 / 0.8)); vertical-align:center; padding-right:8px">
+					<img src="glenmara/bitloom-long.png" style="height:4vh;"></img>
+				</a>
+				<a target="" href="https://bsky.app/profile/bitloomgames.bsky.social" style="padding-right:15px;"><svg width="4vh" height="4vh" viewBox="0 0 600 500" fill="white">
+						<path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.21C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.222 323.8 536.444 388.56 473.333 453.32c-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.89-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.135-1.612 123.121 33.664Z"></path>
+					</svg></a>
+				
+				<a class="social" href="https://www.instagram.com/bitloomgames/"><svg xmlns="http://www.w3.org/2000/svg" width="4vh" height="4vh" fill="white" class="bi bi-instagram" viewBox="0 0 16 16">
+						<path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+				</svg></a>
+			
+				
+			</div>
         </div>
 
-        <button id="paint"></button>
+        
     </body>
 
-    <script>
-        var styleIndex = 0;
-        var styleImages = ["oils", "watercolour", "expressionist", "chalky", "charcoal", "pencil", "mosaic", "lino", "pop", "pixel", "photo"]
-
-        var paint = document.getElementById("paint");
-        var background = document.getElementById("background");
-
-        paint.addEventListener("click", e => {
-            styleIndex += 1;
-
-            if (styleIndex >= styleImages.length)
-            {
-                styleIndex = 0;
-            } 
-
-            background.style.backgroundImage = "url('glenmara/styles/" + styleImages[styleIndex] + ".png')";
-        });
-    </script>
+    <script src="glenmara/script.js"></script>
 </html>

@@ -4,14 +4,6 @@
   src: url(../fonts/phontOG20.ttf) format("truetype");
 }
 
-@keyframes WarpIn
-{
-  0%    {width: 0%; opacity: 0}
-  50%   {width: 100%; opacity: 100%}
-  75%   {width: 90%;}
-  100%  {width: 100%;}
-}
-
 @keyframes LogoWarp
 {
   0%    {rotate: -45deg; opacity: 0}
@@ -23,21 +15,6 @@
 {
   0%    {opacity: 0;}
   100%  {opacity: 100%; }
-}
-
-@keyframes SelectItem
-{
-  0%    {border-radius: 0; }
-  100%  {border-radius: 25px; }
-}
-
-@keyframes ButtonRotate
-{
-  0%    {rotate: 0deg;}
-  25%   {rotate: 5deg;}
-  50%   {rotate: 0deg;}
-  75%   {rotate: -5deg;}
-  100%  {rotate: 0deg;}
 }
 
 @keyframes LogoTextWarpIn
@@ -95,8 +72,18 @@ a.selected
 
 a.social
 {
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+}
+
+a img, a svg {
+	vertical-align:center;
+	transform: scale(1.0); 
+	transition: 0.3s;
+}
+
+a img:hover, a svg:hover {
+	transform: scale(1.1); 
 }
 
 .linkButton
@@ -146,27 +133,6 @@ a.button:hover
   margin-right : auto;
   transform-origin: center;
   max-width: 100%;
-
-  animation-name: WarpIn;
-  animation-duration: .5s;
-  animation-fill-mode: both;
-}
-
-.hidden
-{
-  visibility:collapse;
-  padding: 0;
-  height: 0;
-  position:absolute;
-  display:none;
-}
-
-.contentBoxDelay
-{
-  animation-delay: 0.25s;
-  padding-top: inherit;
-  padding-bottom: inherit;
-  height: inherit;
 }
 
 #logo
@@ -176,7 +142,7 @@ a.button:hover
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 150px;
+  width: 125px;
   height: auto;
   animation: LogoWarp 1s both;
 }
@@ -198,13 +164,6 @@ a.button:hover
   width: 200px;
   height: auto;
 }
-/*
-#teamPhoto
-{
-  max-width: 100%;
-  width: 550px;
-  border-radius: 20px;
-}*/
 
 #tagline
 {
@@ -249,78 +208,9 @@ footer
   opacity: 50%;
 }
 
-.gameEntry
-{
-  width:90%;
-  padding-top:1vh;
-  padding-bottom:1vh;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: center;
-  height:min-content;
-}
-
 h3
 {
   margin-bottom: 0px;
-}
-
-.screenshot
-{
-  max-width:100%;
-  width:480px;
-  height:270px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top:auto;
-  margin-bottom:auto;
-  border-radius: 10px;
-  position: absolute;
-  margin-left: auto;
-  margin-right:auto;
-  left:calc(50% - 240px);
-}
-
-@media screen and (max-width: 480px) 
-{
-  .screenshot
-  {
-    width: 99%;
-	height: auto;
-	left: 0px;
-  }  
-  
-  .slideshow
-  {
-	height:min-content;
-  }
-}
-
-.slideshow
-{
-	align-content: normal;
-	padding-top:10px;
-	width:100%;
-	height:280px;
-}
-
-.fadeInScreenshot
-{
-  animation: TaglinePopIn 1s forwards;
-}
-
-.fadeOutScreenshot
-{
-  animation: TaglinePopIn 1s reverse;
-}
-
-.gameDescription
-{
-  width:95%;
-  height:100%;
-  vertical-align: middle;
-  text-align: center;
-  margin:auto;  
 }
 
 #tag1
@@ -360,10 +250,21 @@ hr
   margin-right: 10%;
 }
 
-@media screen and (max-width: 600px) 
+@media screen and (max-width: 950px) 
 {
   .contentContainer
   {
-    width: 99%;
+	  width: 99%;
   }  
+  
+	.logoImage
+	{
+		min-width:51%;
+		max-width: 75%;
+		width: 300px;
+		height: auto;
+		margin-left:auto;
+		margin-right:auto;
+	}
 }
+
