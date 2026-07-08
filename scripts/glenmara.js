@@ -1,6 +1,9 @@
 var styleIndex = 0;
 var styleImages = ["1", "2", "3", "4", "5", "6"]
 
+const imageLocation = "url('images/styles/";
+const extension = ".webp')";
+
 var paint = document.getElementById("paint");
 var backgrounds = document.getElementsByClassName("background");
 var curBackground = 0
@@ -12,7 +15,7 @@ var fading = false;
 
 for(i = 0; i < backgrounds.length; i++)
 {
-	backgrounds[i].style.backgroundImage="url('glenmara/styles/" + styleImages[styleIndex] + ".png')"
+	backgrounds[i].style.backgroundImage= imageLocation + styleImages[styleIndex] + extension
 	
 	backgrounds[i].style.zIndex = -i - 1;
 }
@@ -45,7 +48,7 @@ function paintClicked(e)
 	backgrounds[curBackground].style.zIndex = -1;
 	backgrounds[targetBackground].style.zIndex = -2;
 	
-	backgrounds[targetBackground].style.backgroundImage = "url('glenmara/styles/" + styleImages[styleIndex] + ".png')";
+	backgrounds[targetBackground].style.backgroundImage = imageLocation + styleImages[styleIndex] + extension
 	backgrounds[targetBackground].style.opacity = 1.0;
 }
 

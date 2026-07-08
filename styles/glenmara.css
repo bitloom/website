@@ -1,6 +1,6 @@
  @font-face {
   font-family: fredoka; 
-  src: url(fredoka.ttf);
+  src: url(../fonts/fredoka.ttf);
 }
 
 @keyframes FadeOpacity
@@ -19,7 +19,8 @@
 	animation: 0.5s ease-in 0s 1 FadeOpacity;
 }
 
-body {
+body 
+{
 	font-family: fredoka;
 	font-size: 2.8vh;
 	color: #FFF !important;
@@ -30,7 +31,8 @@ body {
 	line-height: 4vh;
 }
 
-a {
+a 
+{
 	color: #31567B !important;
 	font-size: 4vh; 
 	line-height: 6vh;
@@ -40,7 +42,8 @@ a {
 	transition: 0.3s;
 }
 
-a:hover {
+a:hover 
+{
 	color: #FFF !important;
 	transform: scale(1.1);
 	text-shadow: 0px 0px 8px rgb(0 0 0 / 0.8);
@@ -51,23 +54,21 @@ a:active
 	transform: scale(0.9);
 }
 
-a img, a svg {
+a img
+{
 	height: 8vh;
 	transform: scale(1.0); 
 	transition: 0.3s;
 }
 
-a img:hover, a svg:hover{
+a img:hover
+{
 	transform: scale(1.1); 
 }
 
-a img:active, a svg:active
-{
-	transform:scale(0.9);
-}
 
 .background {
-	background-image: url("styles/photo.png");
+	background-image: url("images/styles/1.png");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -80,35 +81,30 @@ a img:active, a svg:active
 	z-index: -1;
 }
 
-#paint { 
-	/*right: 6vh; 
-	bottom: 6vh; 
-	width: 8vh; 
-	height: 8vh;
-	position: absolute;
-	*/
+#paint {
 	margin-top:12vh;
 	
 	border: none;
 	cursor: pointer;
-	background-image: url("paint-icon.png");
+	background-image: url("../images/paint-icon.png");
 	background-size: cover;
 	
-	width:8vh;
-	height:8vh;
+	width:10vh;
+	height:10vh;
 	
 	background-color: #00000000;
-	transform: scale(1.0); 
 	transition: 0.1s;
 }
 
-#paint:hover {
-	transform: scale(1.1); 
+#paint:hover 
+{
+	transform: scale(1.1) rotate(5deg); 
 	background-color: #00000000;
 }
 
-#paint:active {
-	transform: scale(0.95); 
+#paint:active 
+{
+	transform: scale(0.95);
 	background-color: #00000000;
 }
 
@@ -117,14 +113,11 @@ a img:active, a svg:active
 	width: 50%;
 }
 
-svg {
-  filter: drop-shadow(0px 0px 5px rgb(0 0 0 / 0.8));
-  /*vertical-align:center;*/
-}
-
-
 .social
 {
 	height: 4vh;
 	align-content:center;
+	filter: drop-shadow(0px 0px 5px rgb(0 0 0 / 0.8)); 
+	vertical-align:center; 
+	padding-right:8px
 }
